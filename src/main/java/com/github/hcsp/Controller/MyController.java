@@ -15,7 +15,7 @@ public class MyController {
     @Autowired
     private rankService service;
 
-    @RequestMapping("/Rank")
+    @RequestMapping(path = "/rank.htm")
     @ResponseBody
     public List<Goods> getRank() {
         return service.getRank();

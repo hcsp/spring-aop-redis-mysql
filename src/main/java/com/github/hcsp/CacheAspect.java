@@ -27,10 +27,13 @@ public class CacheAspect {
         cacheMapValue valueInCache = redisTemplate.opsForValue().get(targetMethodName);
 
         if (cacheExpires(valueInCache, cacheTime)) {
-            return valueInCache;
+            System.out.println("come from cache");
+            return valueInCache.getValue();
         } else {
             Object realValue = joinPoint.proceed();
             redisTemplate.opsForValue().set(targetMethodName, new cacheMapValue(realValue, System.currentTimeMillis()));
+
+            System.out.println("come from joinPoint Method");
             return realValue;
         }
     }
@@ -39,7 +42,7 @@ public class CacheAspect {
         if (cache != null) {
             long createdTime = cache.getCreatedTime();
 
-            return System.currentTimeMillis() - createdTime * 1000 < cacheTime * 1000;
+            return System.currentTimeMillis() - createdTime < cacheTime * 1000;
 
         }
         return false;
