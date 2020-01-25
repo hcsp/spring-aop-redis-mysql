@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hcsp.mapper.RankMapper" >
+    <resultMap id="itemMap" type="com.github.hcsp.entity.Item">
+        <result property="amount" column="amount"/>
+        <association property="goods" javaType="com.github.hcsp.entity.Goods">
+            <id property="id" column="goods_id"/>
+            <result property="name" column="goods_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getRankItemList" resultMap="itemMap">
+        select goods.id as goods_id,goods.name as goods_name,ifnull(sum(price*quantity),0) as amount
+        from goods
+        left join `order` on goods_id = goods.id
+        group by goods.id
+        order by amount desc;
+    </select>
+</mapper>
