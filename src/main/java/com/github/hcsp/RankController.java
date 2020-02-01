@@ -19,13 +19,7 @@ public class RankController {
         this.goodsRankService = goodsRankService;
     }
 
-    @GetMapping("/")
-    @ResponseBody
-    public String test(){
-        return "hello";
-    }
-
-    @GetMapping("/rank.html")
+    @GetMapping("/rank.htm")
     @ResponseBody
     public Object getGoodsRank(){
         List<Goods> goodsList = goodsRankService.getRankList();
