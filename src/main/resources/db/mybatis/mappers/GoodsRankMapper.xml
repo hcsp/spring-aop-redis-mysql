@@ -5,13 +5,13 @@
 <mapper namespace="org.mybatis.example.BlogMapper">
 
     <select id="goodsRank" resultType="com.github.hcsp.entity.Goods" parameterType="int">
-        select
-        row_number() over (order by sum(`order`.price*`order`.quantity) desc) as '排名',
-        goods.name as '商品名',
-        sum(`order`.price*`order`.quantity) as '销售额'
-            from goods
-            left join `order`
-                on goods.id = `order`.goods_id
-        group by goods.id;
+select
+    row_number() over (order by ifnull(sum(`order`.price*`order`.quantity),0) desc) as '排名',
+    goods.name as '商品名',
+    ifnull(sum(`order`.price*`order`.quantity),0) as '销售额'
+from goods
+         left join `order`
+                   on goods.id = `order`.goods_id
+group by goods.id;
     </select>
 </mapper>
