@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="RankMapper">
     <select id="selectRank" resultMap="rankitem">
-        select  name, ifnull(money,0) as money
+        select name, ifnull(money, 0) as money
         from (select goods_id, goods.name as name, sum(price * quantity) as money
               from `order`
                        right join goods
@@ -15,7 +15,7 @@
         order by money desc;
     </select>
     <resultMap id="rankitem" type="rankitem">
-<!--        <result property="order" column="i"/>-->
+        <!--        <result property="order" column="i"/>-->
         <result property="name" column="name"/>
         <result property="money" column="money"/>
     </resultMap>
