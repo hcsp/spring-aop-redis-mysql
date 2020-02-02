@@ -11,7 +11,8 @@
                                   on
                                       `order`.goods_id = goods.id
               group by goods_id
-              order by money desc) as us;
+             ) as us
+        order by money desc;
     </select>
     <resultMap id="rankitem" type="rankitem">
 <!--        <result property="order" column="i"/>-->
