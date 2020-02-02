@@ -19,7 +19,7 @@ public class CacheAspect {
         @NotNull Object rankItemCache;
         @NotNull long time;
 
-        public CacheValue(Object rankItemCache, long time) {
+        CacheValue(Object rankItemCache, long time) {
             this.rankItemCache = rankItemCache;
             this.time = time;
         }
