@@ -31,7 +31,7 @@
     </tr>
     <#list items as item>
         <tr>
-            <td>${item.order}</td>
+            <td>${item?index+1}</td>
             <td>${item.name}</td>
             <td>${item.money}</td>
         </tr>
