@@ -24,14 +24,11 @@
 <h2>商品排行榜</h2>
 
 <table>
-    <thead>
-        <tr>
-            <th>排名</th>
-            <th>商品名</th>
-            <th>成交金额</th>
-        </tr>
-    </thead>
-    <tbody>
+    <tr>
+        <th>排名</th>
+        <th>商品名</th>
+        <th>成交金额</th>
+    </tr>
     <#list items as item>
         <tr>
             <td>${item?index+1}</td>
@@ -39,7 +36,6 @@
             <td>${item.totalPrice}</td>
         </tr>
     </#list>
-    </tbody>
 </table>
 </body>
 </html>

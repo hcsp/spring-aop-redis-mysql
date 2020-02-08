@@ -16,7 +16,7 @@ public class Controller {
     @Autowired
     private RankService rankService;
 
-    @RequestMapping("/")
+    @RequestMapping("/rank.htm")
     @ResponseBody
     public ModelAndView index() {
         List<RankItem> rank = rankService.getRank();
