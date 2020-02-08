@@ -18,7 +18,7 @@ public class CacheAspect {
     RedisTemplate<String, Object> redisTemplate;
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
-    public Object cache(ProceedingJoinPoint joinPoint) {
+    public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         long validTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
         String methodName = signature.getName();
@@ -26,13 +26,9 @@ public class CacheAspect {
         if (cachedValue != null) {
             return cachedValue;
         } else {
-            try {
-                Object realValue = joinPoint.proceed();
-                redisTemplate.opsForValue().set(methodName, realValue, validTime, TimeUnit.SECONDS);
-                return realValue;
-            } catch (Throwable throwable) {
-                throw new RuntimeException(throwable);
-            }
+            Object realValue = joinPoint.proceed();
+            redisTemplate.opsForValue().set(methodName, realValue, validTime, TimeUnit.SECONDS);
+            return realValue;
         }
     }
 }
