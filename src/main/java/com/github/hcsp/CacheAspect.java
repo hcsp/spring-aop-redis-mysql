@@ -20,7 +20,7 @@ public class CacheAspect {
     @Around("@annotation(com.github.hcsp.anno.Cache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        long validTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
+        int validTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
         String methodName = signature.getName();
         Object cachedValue = redisTemplate.opsForValue().get(methodName);
         if (cachedValue != null) {

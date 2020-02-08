@@ -1,8 +1,9 @@
 package com.github.hcsp.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class RankItem {
+public class RankItem implements Serializable {
     private String name;
     private BigDecimal totalPrice;
 
