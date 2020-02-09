@@ -5,5 +5,5 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Cache {
-    int cacheSeconds() default 60;
+    int cacheSeconds() default 1;
 }

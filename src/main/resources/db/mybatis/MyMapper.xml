@@ -8,7 +8,7 @@
         from (select goods_id, sum(price * quantity) as amount
               from `order`
               group by goods_id) t
-                 left join goods g
+                 right join goods g
                             on t.goods_id = g.id
         order by amount desc
     </select>

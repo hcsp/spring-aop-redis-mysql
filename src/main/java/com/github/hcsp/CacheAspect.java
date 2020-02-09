@@ -31,10 +31,11 @@ public class CacheAspect {
         Object cacheValue = redisTemplate.opsForValue().get(name);
 
         if (cacheValue != null) {
+            System.out.println("Get from Cache!");
             return cacheValue;
         } else {
+            System.out.println("Get from Database!");
             Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(name, realValue);
             redisTemplate.opsForValue().set(name, realValue, expireTime, TimeUnit.SECONDS);
             return realValue;
         }
