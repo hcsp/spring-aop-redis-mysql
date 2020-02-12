@@ -33,6 +33,6 @@ public class CacheAspect {
 
     private boolean isCurrentTimeWithinCacheDuration(long currentTime, MethodSignature signature) {
         return (redisTemplate.opsForValue().get("cacheTime")!= null &&
-                currentTime - (long)redisTemplate.opsForValue().get("cacheTime") <= signature.getMethod().getAnnotation(Cache.class).cacheSeconds() * 1000);
+                currentTime - (long) redisTemplate.opsForValue().get("cacheTime") <= signature.getMethod().getAnnotation(Cache.class).cacheSeconds() * 1000);
     }
 }
