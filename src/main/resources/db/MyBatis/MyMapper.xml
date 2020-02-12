@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hcsp.Application">
+    <select id="goodsOrderBySales" resultMap="SalesRank">
+        select t.sales as orderedSales, goods.name as goodsName from
+        (select goods_id, sum(price*quantity) as sales from `order` group by goods_id) t
+        inner join goods on t.goods_id=goods.id order by t.sales desc
+    </select>
+    <!-- Very Complex Result Map -->
+    <resultMap id="SalesRank" type="com.github.hcsp.entity.SalesRank">
+        <result property="sale" column="orderedSales"/>
+        <association property="goods" javaType="com.github.hcsp.entity.Goods">
+            <result property="name" column="goodsName"/>
+        </association>
+    </resultMap>
+</mapper>
