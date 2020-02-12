@@ -1,6 +1,8 @@
 package com.github.hcsp.entity;
 
-public class SalesRank {
+import java.io.Serializable;
+
+public class SalesRank implements Serializable {
     private Goods goods;
     private Integer sale;
 

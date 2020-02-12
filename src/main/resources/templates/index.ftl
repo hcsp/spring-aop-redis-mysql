@@ -30,6 +30,9 @@ tr:nth-child(even) {
         <th>商品名</th>
         <th>成交金额</th>
     </tr>
+    <#list sequence as item>
+    Part repeated for each item
+    </#list>
     <tr>
         <td>1</td>
         <td>西瓜</td>
