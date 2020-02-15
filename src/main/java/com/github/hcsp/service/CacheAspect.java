@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.concurrent.TimeUnit;
+
 @Aspect
 @Configuration
 public class CacheAspect {
@@ -19,20 +21,20 @@ public class CacheAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String methodName = signature.getName();
         Object cacheValue = redisTemplate.opsForValue().get(methodName);
-        if (cacheValue != null && isCurrentTimeWithinCacheDuration(System.currentTimeMillis(), signature)) {
+        int expireTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
+        if (cacheValue != null && isCurrentTimeWithinCacheDuration(System.currentTimeMillis(), expireTime)) {
             System.out.println("load from Redis!");
             return cacheValue;
         } else {
             System.out.println("load from database!");
             Object newValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, newValue);
-            redisTemplate.opsForValue().set("cacheTime", System.currentTimeMillis());
+            redisTemplate.opsForValue().set(methodName, newValue, expireTime, TimeUnit.SECONDS);
             return newValue;
         }
     }
 
-    private boolean isCurrentTimeWithinCacheDuration(long currentTime, MethodSignature signature) {
+    private boolean isCurrentTimeWithinCacheDuration(long currentTime, int expireTime) {
         return (redisTemplate.opsForValue().get("cacheTime")!= null &&
-                currentTime - (long) redisTemplate.opsForValue().get("cacheTime") <= signature.getMethod().getAnnotation(Cache.class).cacheSeconds() * 1000);
+                currentTime - (long) redisTemplate.opsForValue().get("cacheTime") <= expireTime * 1000);
     }
 }

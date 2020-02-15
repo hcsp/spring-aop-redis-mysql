@@ -29,25 +29,15 @@ tr:nth-child(even) {
         <th>排名</th>
         <th>商品名</th>
         <th>成交金额</th>
+        <th>${name}</th>
     </tr>
-    <#list sequence as item>
-    Part repeated for each item
-    </#list>
-    <tr>
-        <td>1</td>
-        <td>西瓜</td>
-        <td>400</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>香蕉</td>
-        <td>200</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
+<#--    <#list items as item>
+        <tr>
+            <td>${item?index+1}</td>
+            <td>${item.goods.name}</td>
+            <td>${item.sale}</td>
+        </tr>
+    </#list>-->
 </table>
 
 </body>
