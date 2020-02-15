@@ -29,15 +29,14 @@ tr:nth-child(even) {
         <th>排名</th>
         <th>商品名</th>
         <th>成交金额</th>
-        <th>${name}</th>
     </tr>
-<#--    <#list items as item>
+    <#list items as item>
         <tr>
             <td>${item?index+1}</td>
             <td>${item.goods.name}</td>
             <td>${item.sale}</td>
         </tr>
-    </#list>-->
+    </#list>
 </table>
 
 </body>

@@ -16,13 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class CacheAspect {
     @Autowired
     RedisTemplate redisTemplate;
+
     @Around("@annotation(com.github.hcsp.annotation.Cache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String methodName = signature.getName();
         Object cacheValue = redisTemplate.opsForValue().get(methodName);
         int expireTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
-        if (cacheValue != null && isCurrentTimeWithinCacheDuration(System.currentTimeMillis(), expireTime)) {
+        if (cacheValue != null) {
             System.out.println("load from Redis!");
             return cacheValue;
         } else {
@@ -31,10 +32,5 @@ public class CacheAspect {
             redisTemplate.opsForValue().set(methodName, newValue, expireTime, TimeUnit.SECONDS);
             return newValue;
         }
-    }
-
-    private boolean isCurrentTimeWithinCacheDuration(long currentTime, int expireTime) {
-        return (redisTemplate.opsForValue().get("cacheTime")!= null &&
-                currentTime - (long) redisTemplate.opsForValue().get("cacheTime") <= expireTime * 1000);
     }
 }

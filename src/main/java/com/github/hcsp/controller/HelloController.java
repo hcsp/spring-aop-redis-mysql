@@ -23,12 +23,11 @@ public class HelloController {
         return "hello!";
     }
 
-    @RequestMapping("/rank")
+    @RequestMapping("/rank.html")
     public ModelAndView getRankData() {
         Map<String, Object> model = new HashMap<>();
-        // List<SalesRank> salesRanksList = getSalesRank.getSalesByGoods();
-        // model.put("items", salesRanksList);
-        model.put("name", "zhangsan");
+        List<SalesRank> salesRanksList = getSalesRank.getSalesByGoods();
+        model.put("items", salesRanksList);
         return new ModelAndView("index", model);
     }
 
