@@ -23,7 +23,7 @@ public class HelloController {
         return "hello!";
     }
 
-    @RequestMapping("/rank.html")
+    @RequestMapping("/rank.htm")
     public ModelAndView getRankData() {
         Map<String, Object> model = new HashMap<>();
         List<SalesRank> salesRanksList = getSalesRank.getSalesByGoods();
