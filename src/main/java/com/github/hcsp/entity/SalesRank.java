@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class SalesRank implements Serializable {
     private Goods goods;
-    private Integer sale;
+    private int sale;
 
     public Goods getGoods() {
         return goods;
@@ -14,7 +14,7 @@ public class SalesRank implements Serializable {
         this.goods = goods;
     }
 
-    public Integer getSale() {
+    public int getSale() {
         return sale;
     }
 
