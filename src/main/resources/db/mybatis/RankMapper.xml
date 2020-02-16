@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hcsp.RankMapper">
+    <!--    这里不能用xx.xx的语法设置到resultMap中-->
+    <select id="selectRank" resultType="com.github.hcsp.entity.Rank">
+        select
+            goods.name as goodsName,
+            sum(`order`.quantity*order.price) as orderPrice
+        from `order`
+        left join goods
+        on `order`.goods_id = goods.id
+        group by goods.name
+    </select>
+</mapper>
