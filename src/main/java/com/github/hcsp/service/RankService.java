@@ -1,5 +1,6 @@
 package com.github.hcsp.service;
 
+import com.github.hcsp.annotation.Cache;
 import com.github.hcsp.dao.RankDao;
 import com.github.hcsp.entity.Rank;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ public class RankService {
     @Autowired
     private RankDao rankDao;
 
+    @Cache(cacheSeconds = 2)
     public List<Rank> getRankList(){
         return rankDao.getRankList();
     }
