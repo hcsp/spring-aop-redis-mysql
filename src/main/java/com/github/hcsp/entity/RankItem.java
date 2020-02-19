@@ -1,25 +1,24 @@
 package com.github.hcsp.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class RankItem implements Serializable {
-    private Goods goods;
-    private BigDecimal turnover = BigDecimal.ZERO;
+    private String goodName;
+    private int goodTotal;
 
-    public Goods getGoods() {
-        return goods;
+    public String getGoodName() {
+        return goodName;
     }
 
-    public void setGoods(Goods goods) {
-        this.goods = goods;
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
     }
 
-    public BigDecimal getTurnover() {
-        return turnover;
+    public int getGoodTotal() {
+        return goodTotal;
     }
 
-    public void setTurnover(BigDecimal turnover) {
-        this.turnover = turnover;
+    public void setGoodTotal(int goodTotal) {
+        this.goodTotal = goodTotal;
     }
 }
