@@ -22,13 +22,13 @@ public class RankController {
         @Autowired
         private RankService rankService;
 
-        @RequestMapping("/rank.htm")
+        @RequestMapping(value = "/rank.htm")
         @ResponseBody
         public ModelAndView search() {
             List<RankItem> rankItemList = rankService.selectRank();
             HashMap<String, Object> model = new HashMap<>();
             model.put("items", rankItemList);
-            return new ModelAndView("Rank", model);
+            return new ModelAndView("rank", model);
         }
     }
 }

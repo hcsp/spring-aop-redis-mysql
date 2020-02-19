@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>商品排行榜</title>
     <style>
         table {
@@ -28,11 +29,11 @@
         <th>成交金额</th>
     </tr>
     <#list items as item>
-    <tr>
-        <td>${item?index + 1}</td>
-        <td>${item.goods.name}</td>
-        <td>${item.turnover}</td>
-    </tr>
+        <tr>
+            <td>${item?index+1}</td>
+            <td>${item.goodName}</td>
+            <td>${item.goodTotal}</td>
+        </tr>
     </#list>
 </table>
 
