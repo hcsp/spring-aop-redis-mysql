@@ -13,22 +13,16 @@ import java.util.List;
 
 @RestController
 public class RankController {
+
     @Autowired
     private RankService rankService;
 
-    @RestController
-    public class Controller {
-
-        @Autowired
-        private RankService rankService;
-
-        @RequestMapping(value = "/rank.htm")
-        @ResponseBody
-        public ModelAndView search() {
-            List<RankItem> rankItemList = rankService.selectRank();
-            HashMap<String, Object> model = new HashMap<>();
-            model.put("items", rankItemList);
-            return new ModelAndView("rank", model);
-        }
+    @RequestMapping(value = "/rank.htm")
+    @ResponseBody
+    public ModelAndView search() {
+        List<RankItem> rankItemList = rankService.selectRank();
+        HashMap<String, Object> model = new HashMap<>();
+        model.put("items", rankItemList);
+        return new ModelAndView("rank", model);
     }
 }
