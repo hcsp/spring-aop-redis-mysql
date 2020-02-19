@@ -100,7 +100,7 @@
                 <configuration>
                     <url>jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8</url>
                     <user>root</user>
-                    <password>root</password>
+                    <password>123456</password>
                 </configuration>
                 <executions>
                     <execution>
