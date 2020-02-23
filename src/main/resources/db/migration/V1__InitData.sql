@@ -1,9 +1,5 @@
-alter database mall character set utf8mb4;
-set global character_set_server=utf8mb4;
-set global character_set_database=utf8mb4;
-
 -- 用户表
-create table `user`
+create table user
 (
     id   bigint auto_increment primary key,
     name varchar(100) unique comment '用户名'
@@ -29,7 +25,7 @@ create table `order`
 ) DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-insert into `user` (id, name)
+insert into user(id, name)
 values (1, '张三'),
        (2, '李四'),
        (3, '王五'),
@@ -60,4 +56,4 @@ values (1, 100, 1, 100, 2),
        (15, 200, 4, 200, 8),
        (16, 300, 1, 300, 20),
        (17, 100, 4, 100, 13),
-       (18, 400, 2, 400, 8);
+       (18, 400, 2, 400, 8)
