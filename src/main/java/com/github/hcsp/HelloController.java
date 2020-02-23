@@ -38,8 +38,11 @@ public class HelloController {
         return orderService.getOrderList();
     }
 
-    @RequestMapping("/rank")
+    //指定多个路径映射到同一个回调
+    @RequestMapping(value={"/rank", "/rank.html", "/rank.htm"})
     public Object rank(){
-        return rankService.getRankList();
+        Map<String, Object> model = new HashMap<>();
+        model.put("rankList", rankService.getRankList());
+        return new ModelAndView("index", model);
     }
 }

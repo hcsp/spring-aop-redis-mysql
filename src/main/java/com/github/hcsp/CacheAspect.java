@@ -5,8 +5,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,11 +18,14 @@ import java.util.Map;
 import java.util.Objects;
 
 @Aspect
-@Configuration//标记这是一个配置类
+@Configuration
 public class CacheAspect {
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
+
     Map<CacheKey, CacheValue> cache = new HashMap<>();
     //拦截带有某种注解的方法
-    @Around("@annotation(com.github.hcsp.annotation.Cache)")
+//    @Around("@annotation(com.github.hcsp.annotation.Cache)")
     public Object cache(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         //方法名
@@ -31,10 +38,10 @@ public class CacheAspect {
         Object thisObject = proceedingJoinPoint.getThis();
         CacheKey cacheKey = new CacheKey(method.getName(), args, thisObject);
         CacheValue cacheValue = cache.get(cacheKey);
-        if( cacheValue!=null && !cacheExpire(cacheValue, method) ){
+        if ( cacheValue!=null && !cacheExpire(cacheValue, method) ){
             System.out.println("hit cache");
             return cache.get(cacheKey).value;
-        }else{
+        } else {
             System.out.println("gen cache");
             cacheValue = new CacheValue(proceedingJoinPoint.proceed(), System.currentTimeMillis());
             cache.put(cacheKey, cacheValue);
@@ -42,10 +49,27 @@ public class CacheAspect {
         }
     }
 
-    private static class CacheValue{
+    @Around("@annotation(com.github.hcsp.annotation.Cache)")
+    public Object cacheByRedis(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+        Method method = methodSignature.getMethod();
+        String methodName = method.getName();
+
+        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+        CacheValue cache = (CacheValue) redisTemplate.opsForValue().get( methodName );
+        if (cache==null || cacheExpire(cache, method)){
+            cache = new CacheValue(proceedingJoinPoint.proceed(), System.currentTimeMillis());
+            redisTemplate.opsForValue().set( methodName, cache );
+        }
+        return cache.value;
+    }
+
+
+    private static class CacheValue implements Serializable {
+        private static final long serialVersionUID = 4125096758372084309L;
         private Object value;
         private long time;
-        public CacheValue(Object value, long time){
+        CacheValue(Object value, long time){
             this.time = time;
             this.value = value;
         }
@@ -60,7 +84,7 @@ public class CacheAspect {
         private Object[] arguments;
         private Object thisObject;
 
-        public CacheKey(String methodName, Object[] arguments, Object thisObject){
+        CacheKey(String methodName, Object[] arguments, Object thisObject){
             this.methodName = methodName;
             this.arguments = arguments;
             this.thisObject = thisObject;
@@ -68,8 +92,12 @@ public class CacheAspect {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o){
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()){
+                return false;
+            }
             CacheKey cacheKey = (CacheKey) o;
             return Objects.equals(methodName, cacheKey.methodName) &&
                     Arrays.equals(arguments, cacheKey.arguments) &&

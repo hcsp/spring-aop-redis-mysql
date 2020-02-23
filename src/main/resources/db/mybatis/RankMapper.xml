@@ -7,10 +7,11 @@
     <select id="selectRank" resultType="com.github.hcsp.entity.Rank">
         select
             goods.name as goodsName,
-            sum(`order`.quantity*order.price) as orderPrice
-        from `order`
-        left join goods
+            ifnull(sum(`order`.quantity*`order`.price), 0) as orderPrice
+        from goods
+        left join `order`
         on `order`.goods_id = goods.id
         group by goods.name
+        order by orderPrice desc;
     </select>
 </mapper>
