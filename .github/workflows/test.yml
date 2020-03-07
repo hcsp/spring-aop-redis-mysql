@@ -1,6 +1,6 @@
 name: Test
 
-on: [fuck]
+on: [push]
 
 jobs:
   test:
