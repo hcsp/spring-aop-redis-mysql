@@ -57,12 +57,12 @@ tr:nth-child(even) {
     <td>2</td>
     <td>香蕉</td>
     <td>200</td>
-  </tr>  
+  </tr>
   <tr>
     <td>3</td>
     <td>...</td>
     <td>...</td>
-  </tr>  	
+  </tr>
 </table>
 
 </body>
@@ -71,5 +71,9 @@ tr:nth-child(even) {
 
 在提交Pull Request之前，你应当在本地确保所有代码已经编译通过，并且通过了测试(`mvn clean verify`)
 
+-----
+注意！我们只允许你修改以下文件，对其他文件的修改会被拒绝：
+- [src/main/java](https://github.com/hcsp/spring-aop-redis-mysql/blob/master/src/main/java)
+- [pom.xml](https://github.com/hcsp/spring-aop-redis-mysql/blob/master/pom.xml)
+-----
 
-完成题目有困难？不妨来看看[写代码啦的相应课程](https://xiedaimala.com/tasks/6625691d-7d66-4076-8141-0d11d4fbbaca)吧！

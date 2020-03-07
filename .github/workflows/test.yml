@@ -1,0 +1,29 @@
+name: Test
+
+on: [push_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: $/{{ runner.os \}}-maven-$/{{ hashFiles('pom.xml') }}
+          restore-keys: |
+            $/{{ runner.os }}-maven-
+      - name: Verify whitelist
+        run: ./.circleci/verifyWhitelist.sh
+      - name: Start mysql
+        run: docker run -d -p 3306:3306 --name=mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=mall mysql
+      - name: Start redis
+        run: docker run -d -p 6379:6379 --name=redis redis
+      - name: Wait for startup
+        run: sleep 20
+      - name: Maven verify
+        run: mvn verify
