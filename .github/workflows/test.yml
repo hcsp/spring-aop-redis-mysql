@@ -20,7 +20,7 @@ jobs:
       - name: Verify whitelist
         run: ./.circleci/verifyWhitelist.sh
       - name: Start mysql
-        run: docker run -d -p 3306:3306 --name=mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=mall mysql
+        run: sudo service mysql stop && docker run -d -p 3306:3306 --name=mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=mall mysql
       - name: Start redis
         run: docker run -d -p 6379:6379 --name=redis redis
       - name: Wait for startup
