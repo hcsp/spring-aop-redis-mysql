@@ -6,13 +6,12 @@
     <select id="selectRank" resultMap="rankItem">
         select goods.name,sum(`order`.price*`order`.quantity) as total
         from `order`
-                 join goods on
+                 right join goods on
             `order`.goods_id = goods.id
         group by name
         order by total desc;
     </select>
 
-    <!-- 非常复杂的结果映射 -->
     <resultMap id="rankItem" type="com.github.hcsp.entity.RankItem">
         <result property="goodName" column="name"/>
         <result property="total" column="total"/>
