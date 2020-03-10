@@ -18,7 +18,6 @@ public class CacheAspect {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
 
-
     @Around("@annotation(com.github.hcsp.annotation.Cache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -36,3 +35,4 @@ public class CacheAspect {
         }
     }
 }
+

@@ -32,3 +32,4 @@ public class RankController {
         return new ModelAndView("rank", model);
     }
 }
+

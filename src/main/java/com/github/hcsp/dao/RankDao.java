@@ -16,3 +16,4 @@ public class RankDao {
         return sqlSession.selectList("Mapper.selectRank");
     }
 }
+

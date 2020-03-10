@@ -22,3 +22,4 @@ public class RankItem implements Serializable {
         this.goodTotal = goodTotal;
     }
 }
+
