@@ -26,4 +26,4 @@ jobs:
       - name: Wait for startup
         run: sleep 20
       - name: Maven verify
-        run: mvn verify
+        run: mvn verify -P defaultMavenCentral
