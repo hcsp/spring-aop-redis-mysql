@@ -45,14 +45,25 @@
             <version>1.12.1</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>alimaven</id>
-            <name>aliyun maven</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
 
     <properties>
         <java.version>1.8</java.version>
@@ -111,7 +122,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
                 <configuration>
                     <configLocation>${basedir}/checkstyle.xml</configLocation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -137,4 +148,30 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>aliyunRepo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>alimaven</id>
+                    <name>aliyun maven</name>
+                    <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+        <profile>
+            <id>defaultMavenCentral</id>
+            <repositories>
+                <repository>
+                    <id>mavenCentral</id>
+                    <name>maven central</name>
+                    <url>https://repo.maven.apache.org/maven2/</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 </project>
