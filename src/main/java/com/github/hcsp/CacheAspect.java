@@ -1,5 +1,6 @@
 package com.github.hcsp;
 
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -7,6 +8,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
+
+import java.util.concurrent.TimeUnit;
 
 @Aspect
 @Configuration
@@ -16,11 +19,13 @@ public class CacheAspect {
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
+
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
         String methodName = signature.getName();
 
         Object cachedValue = redisTemplate.opsForValue().get(methodName);
+
 
         if (cachedValue != null) {
             System.out.println("get value from cache!");
@@ -28,7 +33,7 @@ public class CacheAspect {
         } else {
             System.out.println("get value from database!");
             Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, realValue);
+            redisTemplate.opsForValue().set(methodName, realValue, 1, TimeUnit.SECONDS);
             return realValue;
         }
     }
