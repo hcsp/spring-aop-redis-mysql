@@ -1,6 +1,5 @@
 package com.github.hcsp;
 
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,13 +18,11 @@ public class CacheAspect {
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
-
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
         String methodName = signature.getName();
 
         Object cachedValue = redisTemplate.opsForValue().get(methodName);
-
 
         if (cachedValue != null) {
             System.out.println("get value from cache!");
