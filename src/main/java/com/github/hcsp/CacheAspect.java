@@ -1,5 +1,6 @@
 package com.github.hcsp;
 
+import com.github.hcsp.anno.Cache;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class CacheAspect {
     @Autowired
+    private
     RedisTemplate<String, Object> redisTemplate;
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
@@ -22,15 +24,17 @@ public class CacheAspect {
 
         String methodName = signature.getName();
 
-        Object cachedValue = redisTemplate.opsForValue().get(methodName);
+        Object cacheValue = redisTemplate.opsForValue().get(methodName);
 
-        if (cachedValue != null) {
+        int expireTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
+
+        if (cacheValue != null) {
             System.out.println("get value from cache!");
-            return cachedValue;
+            return cacheValue;
         } else {
-            System.out.println("get value from database!");
             Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, realValue, 1, TimeUnit.SECONDS);
+            System.out.println("get value from database!");
+            redisTemplate.opsForValue().set(methodName, realValue, expireTime, TimeUnit.SECONDS);
             return realValue;
         }
     }

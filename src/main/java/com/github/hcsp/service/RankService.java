@@ -14,7 +14,7 @@ public class RankService {
     @Autowired
     private RankDao rankDao;
 
-    @Cache
+    @Cache(cacheSeconds = 1)
     public List<RankItem> selectRank(){
         return rankDao.getRank();
     }
