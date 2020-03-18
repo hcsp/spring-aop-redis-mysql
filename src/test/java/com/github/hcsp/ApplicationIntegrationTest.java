@@ -60,7 +60,7 @@ public class ApplicationIntegrationTest {
 
     @AfterEach
     public void cleanUp() throws SQLException {
-        // runSql("delete from goods where name = '肥皂'");
+        runSql("delete from goods where name = '肥皂'");
     }
 
     private void runSql(String sql) throws SQLException {
