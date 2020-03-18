@@ -1,7 +1,6 @@
 package com.github.hcsp.service;
 
 import com.github.hcsp.entity.GoodsDealInfo;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.github.hcsp.DAO.impl;
 
 import com.github.hcsp.DAO.DealRankDAO;
 import com.github.hcsp.entity.GoodsDealInfo;
-import com.github.hcsp.myAnnotation.Cache;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
