@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MyMapper">
+    <select id="selectRank" resultType="com.github.hcsp.entity.RankItem">
+        select goods.name as goodsName,t.totalGoods
+        from
+        (select goods_id,sum(price*quantity) as totalGoods
+        from `order`
+        group by goods_id) t
+        right join goods
+        on goods.id = t.goods_id
+        order by totalGoods desc
+    </select>
+<!--    <resultMap id="RankItem" type="com.github.hcsp.entity.RankItem">-->
+<!--        <result property="totalGoods" column="totalGoods"/>-->
+<!--        <association property="goods" javaType="com.github.hcsp.entity.Goods">-->
+<!--            <result property="name" column="goodsName"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+</mapper>
