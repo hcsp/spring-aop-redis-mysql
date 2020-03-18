@@ -18,13 +18,12 @@ import java.util.List;
 public interface DealRankDAO {
     @Results(@Result(property = "dealPrice", column = "totalDeal"))
 
-    @Select("SELECT\n" +
-            "\tg.NAME,\n" +
-            "\tSUM(o.sum) totalDeal\n" +
-            "FROM\n" +
-            "\t( SELECT o.goods_id, (o.price* o.quantity) sum FROM `order` o ) o\n" +
-            "\tINNER JOIN goods g ON g.id = o.goods_id\n" +
-            "\tGROUP BY g.name\n" +
-            "\tORDER BY totalDeal DESC")
+    @Select("select r.name, COALESCE(r.totalDeal, 0)\n" +
+            "from (SELECT g.NAME,\n" +
+            "             SUM(o.sum) totalDeal\n" +
+            "      FROM (SELECT o.goods_id, (o.price * o.quantity) sum FROM `order` o) o\n" +
+            "               right JOIN goods g ON g.id = o.goods_id\n" +
+            "      GROUP BY g.name\n" +
+            "      ORDER BY totalDeal DESC) r;")
     List<GoodsDealInfo> getDealRank();
 }

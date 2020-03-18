@@ -60,11 +60,11 @@ public class ApplicationIntegrationTest {
 
     @AfterEach
     public void cleanUp() throws SQLException {
-        runSql("delete from goods where name = '肥皂'");
+        // runSql("delete from goods where name = '肥皂'");
     }
 
     private void runSql(String sql) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8", "root", "123456");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.15.17:3306/mall?characterEncoding=utf-8", "root", "123456");
         try (Statement statement = conn.createStatement()) {
             statement.execute(sql);
         }

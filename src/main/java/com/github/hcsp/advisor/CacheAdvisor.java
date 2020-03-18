@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,8 @@ public class CacheAdvisor {
         List<GoodsDealInfo> model;
         if (isValidCacheTime(pjp)) {
             System.out.println("走缓存");
-            model = (List<GoodsDealInfo>) redisTemplate.opsForHash().get(methodName, "map");
+            HashOperations<String, String, List<GoodsDealInfo>> res = redisTemplate.opsForHash();
+            model = res.get(methodName, "map");
         } else {
             System.out.println("走数据库");
             model = (List<GoodsDealInfo>) pjp.proceed();
@@ -46,7 +48,8 @@ public class CacheAdvisor {
         Method method = signature.getMethod();
         long validCacheTime = method.getAnnotation(Cache.class).value();
         long currentTimeMillis = System.currentTimeMillis();
-        boolean flag = currentTimeMillis - lastMilliTime <= validCacheTime * 1000;
+        long duration = currentTimeMillis - lastMilliTime;
+        boolean flag = duration <= (validCacheTime * 1000);
         lastMilliTime = currentTimeMillis;
         return flag;
     }
