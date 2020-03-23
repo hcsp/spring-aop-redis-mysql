@@ -30,7 +30,7 @@ public class ApplicationIntegrationTest {
 
     @Test
     public void test() throws Exception {
-        String url = "http://localhost:" + environment.getProperty("local.server.port");
+        String url = "http://172.16.15.17:" + environment.getProperty("local.server.port");
 
         // 第一次访问
         Document html = Jsoup.parse(new URL(url), 60 * 1000);
@@ -64,7 +64,7 @@ public class ApplicationIntegrationTest {
     }
 
     private void runSql(String sql) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8", "root", "123456");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.15.17:3306/mall?characterEncoding=utf-8", "root", "123456");
         try (Statement statement = conn.createStatement()) {
             statement.execute(sql);
         }
