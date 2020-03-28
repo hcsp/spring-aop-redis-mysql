@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyMapper">
+    <select id="selectRank" resultMap="rankItem">
+        select GOODS.NAME as goods_name, rank.turnover as turnover
+        from (select "ORDER".GOODS_ID, sum(PRICE * QUANTITY) as turnover
+              from "ORDER"
+              group by GOODS_ID
+              order by turnover desc) rank
+                 inner join GOODS
+                            on rank.GOODS_ID = GOODS.ID
+    </select>
+
+    <!-- 非常复杂的结果映射 -->
+    <resultMap id="rankItem" type="com.github.hcsp.entity.RankItem">
+        <result property="score" column="turnover"/>
+        <association property="goods" javaType="com.github.hcsp.entity.Goods">
+            <result property="name" column="goods_name"/>
+        </association>
+    </resultMap>
+</mapper>

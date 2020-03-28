@@ -3,16 +3,14 @@ create table user
 (
     id   bigint auto_increment primary key,
     name varchar(100) unique comment '用户名'
-) DEFAULT CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+);
 
 -- 商品表
 create table goods
 (
     id   bigint auto_increment primary key,
     name varchar(100) comment '商品名'
-) DEFAULT CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+);
 
 -- 订单表
 create table `order`
@@ -22,8 +20,7 @@ create table `order`
     user_id  bigint comment '用户id',
     price    int comment '价格',
     quantity int comment '数量'
-) DEFAULT CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+);
 
 insert into user(id, name)
 values (1, '张三'),

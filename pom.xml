@@ -45,6 +45,22 @@
             <version>1.12.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+        </dependency>
+        <!--freemarker-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -74,7 +90,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.1.1</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8</url>
+                    <url>jdbc:h2:file:C:/Users/63167/IdeaProjects/spring-aop-redis-mysql/target/rank</url>
                     <user>root</user>
                     <password>123456</password>
                 </configuration>
