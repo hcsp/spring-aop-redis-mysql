@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MyMapper">
     <select id="selectRank" resultMap="rankItem">
-        select GOODS.NAME as goods_name, rank.turnover as turnover
-        from (select "ORDER".GOODS_ID, sum(PRICE * QUANTITY) as turnover
-              from "ORDER"
-              group by GOODS_ID
-              order by turnover desc) rank
-                 inner join GOODS
-                            on rank.GOODS_ID = GOODS.ID
+        select g.name as goods_name, turnover
+        from (select goods_id, sum(price * quantity) as turnover
+              from `order`
+              group by goods_id) t
+                 right join goods g
+                            on t.goods_id = g.id
+        order by turnover desc
     </select>
 
     <!-- 非常复杂的结果映射 -->

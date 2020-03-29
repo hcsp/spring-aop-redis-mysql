@@ -17,12 +17,12 @@ public class HelloController {
     @Autowired
     private RankService rankService;
 
-    @RequestMapping("/")
+    @RequestMapping("/rank.htm")
 //    @ResponseBody
     public ModelAndView index() {
         List<RankItem> items = rankService.getRank();
-        HashMap<String,Object> model = new HashMap<>();
-        model.put("items",items);
-        return new ModelAndView("index",model);
+        HashMap<String, Object> model = new HashMap<>();
+        model.put("items", items);
+        return new ModelAndView("index", model);
     }
 }
