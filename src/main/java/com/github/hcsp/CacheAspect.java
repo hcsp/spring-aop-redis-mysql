@@ -22,7 +22,7 @@ public class CacheAspect {
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
-        int expireTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
+        long expireTime = signature.getMethod().getAnnotation(Cache.class).cacheSeconds();
 
         String methodName = signature.getName();
         Object cacheValue = redisTemplate.opsForValue().get(methodName);
