@@ -1,6 +1,8 @@
 package com.github.hcsp.entity;
 
-public class RankItem {
+import java.io.Serializable;
+
+public class RankItem implements Serializable {
     private int score;
     private Goods goods;
 

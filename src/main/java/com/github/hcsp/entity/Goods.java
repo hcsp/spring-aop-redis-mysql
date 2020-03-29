@@ -1,10 +1,10 @@
 package com.github.hcsp.entity;
 
-public class Goods {
+import java.io.Serializable;
+
+public class Goods implements Serializable {
     private Integer id;
     private String name;
-
-
 
     public String getName() {
         return name;
