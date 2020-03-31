@@ -16,7 +16,7 @@
         (
             select goods.name as goods_name,`order`.price*`order`.quantity as amount from
             goods
-            inner join `order`
+            left join `order`
             on goods.id=`order`.goods_id
         ) g
         group by g.goods_name

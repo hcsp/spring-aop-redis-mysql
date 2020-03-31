@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class RankItem implements Serializable {
     private Goods goods;
-    private Integer amount;
+    private int amount;
 
     public Goods getGoods() {
         return goods;

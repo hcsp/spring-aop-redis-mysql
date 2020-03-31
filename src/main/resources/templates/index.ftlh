@@ -35,7 +35,7 @@ tr:nth-child(even) {
     <tr>
         <td>${item?index+1}</td>
         <td>${item.goods.name}</td>
-        <td>${item.amount}</td>
+        <td>${item.amount!0}</td>
     </tr>
     </#list>
 

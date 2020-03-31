@@ -3,7 +3,7 @@ package com.github.hcsp.entity;
 import java.io.Serializable;
 
 public class Goods implements Serializable {
-    private Integer id;
+    private int id;
     private String name;
 
     public int getId() {
