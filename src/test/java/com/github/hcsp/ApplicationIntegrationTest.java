@@ -39,7 +39,7 @@ public class ApplicationIntegrationTest {
                 html.select("td").stream().map(Element::text).map(s -> s.replace(",", "").trim()).collect(Collectors.toList())
         );
 
-        runSql("insert into goods (name)values('肥皂')");
+        runSql("insert into Goods (name)values('肥皂')");
 
         // 第二次访问，应该从缓存中获取，得到旧数据
         html = Jsoup.parse(new URL(url), 60 * 1000);
@@ -60,7 +60,7 @@ public class ApplicationIntegrationTest {
 
     @AfterEach
     public void cleanUp() throws SQLException {
-        runSql("delete from goods where name = '肥皂'");
+        runSql("delete from Goods where name = '肥皂'");
     }
 
     private void runSql(String sql) throws SQLException {
