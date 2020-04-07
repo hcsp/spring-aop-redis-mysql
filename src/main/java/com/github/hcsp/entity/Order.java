@@ -1,6 +1,8 @@
 package com.github.hcsp.entity;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     Goods goods;
     User user;
     int id;
