@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="Goods" type="com.github.hcsp.entity.Goods"/>
+        <typeAlias alias="Order" type="com.github.hcsp.entity.Order"/>
+        <typeAlias alias="User" type="com.github.hcsp.entity.User"/>
+        <typeAlias alias="RankItem" type="com.github.hcsp.entity.RankItem"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="db/mybatis/myMapper.xml"/>
+    </mappers>
+</configuration>
