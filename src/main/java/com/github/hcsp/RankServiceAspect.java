@@ -18,17 +18,17 @@ public class RankServiceAspect {
     @Autowired
     RedisTemplate redisTemplate;
 
-    Instant start ;
-    Instant end ;
+    Instant start;
+    Instant end;
     List<RankItem> list;
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
 
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
-        start=Instant.now();
+        start = Instant.now();
         String methodName = joinPoint.getSignature().getName();
-        if (redisTemplate.opsForValue().get(methodName) != null && end!=null &&
-                Duration.between(end,start).toMillis()<1000) {
+        if (redisTemplate.opsForValue().get(methodName) != null && end != null &&
+                Duration.between(end, start).toMillis() < 1000) {
             System.out.println("Get result from cache");
             list = (List) redisTemplate.opsForValue().get(methodName);
         } else {
@@ -36,7 +36,7 @@ public class RankServiceAspect {
             list = (List) joinPoint.proceed();
             redisTemplate.opsForValue().set(methodName, list);
         }
-        end=Instant.now();
+        end = Instant.now();
         return list;
     }
 }
