@@ -28,7 +28,7 @@ public class RedisAopCache {
         } else {
             System.out.println("get value from database!");
             Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, realValue, 20, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(methodName, realValue, 1, TimeUnit.SECONDS);
             return realValue;
         }
     }
