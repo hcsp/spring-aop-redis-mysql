@@ -7,14 +7,17 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 @Aspect
 @Configuration
 public class RedisAopCache {
-    @Resource
+    final
     RedisTemplate<String, Object> redisTemplate;
+
+    public RedisAopCache(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     @Around("@annotation(com.github.hcsp.annotation.RedisAopCache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -28,7 +31,8 @@ public class RedisAopCache {
         } else {
             System.out.println("get value from database!");
             Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, realValue, 1, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(methodName, realValue);
+            redisTemplate.expire(methodName, 1, TimeUnit.SECONDS);
             return realValue;
         }
     }

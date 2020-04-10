@@ -1,5 +1,6 @@
 package com.github.hcsp.service.impl;
 
+import com.github.hcsp.annotation.RedisAopCache;
 import com.github.hcsp.mapper.RankMapper;
 import com.github.hcsp.entity.RankItem;
 import com.github.hcsp.service.IRankService;
@@ -13,6 +14,7 @@ public class RankServiceImpl implements IRankService {
     @Resource
     private RankMapper rankMapper;
 
+    @RedisAopCache
     @Override
     public List<RankItem> selectRank() {
         return rankMapper.selectRank();
