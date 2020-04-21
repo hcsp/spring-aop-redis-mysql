@@ -18,7 +18,7 @@ public class RankService {
         this.rankDao = rankDao;
     }
 
-    @Cache
+    @Cache(timeout = 1)
     public List<Rank> getGoodsRank() {
         return rankDao.getGoodsRank();
     }

@@ -1,5 +1,6 @@
 package com.github.hcsp;
 
+import com.github.hcsp.anno.Cache;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,7 +33,9 @@ public class RedisCacheAspect {
 
         System.out.println("没有 Redis 缓存或缓存过期");
         value = joinPoint.proceed();
-        redisTemplate.opsForValue().set(name, value, 1L, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(name, value);
+        int timeout = signature.getMethod().getAnnotation(Cache.class).timeout();
+        redisTemplate.expire(name, timeout, TimeUnit.SECONDS);
         return value;
     }
 }
