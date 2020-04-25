@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -21,10 +22,10 @@ public class CacheAspect {
     public Object cache(final ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature)joinPoint.getSignature();
         String methodName = signature.getName();
-        Object target = joinPoint.getTarget();
+        String className = joinPoint.getTarget().getClass().getName();
         Object[] args = joinPoint.getArgs();
 
-        Object cacheKey = (Object) new CacheKey(methodName, target, args);
+        Object cacheKey = (Object) new CacheKey(methodName, className, args);
 
         Object cachedValue = redisTemplate.opsForValue().get(cacheKey);
 
@@ -39,14 +40,14 @@ public class CacheAspect {
         }
     }
 
-    public static class CacheKey {
+    public static class CacheKey implements Serializable {
         private String methodName;
-        private Object thisObject;
+        private Object className;
         private Object[] arguments;
 
-        public CacheKey(String methodName, Object thisObject, Object[] arguments) {
+        public CacheKey(String methodName, Object className, Object[] arguments) {
             this.methodName = methodName;
-            this.thisObject = thisObject;
+            this.className = className;
             this.arguments = arguments;
         }
 
@@ -56,13 +57,13 @@ public class CacheAspect {
             if (o == null || getClass() != o.getClass()) return false;
             CacheKey cacheKey = (CacheKey) o;
             return methodName.equals(cacheKey.methodName) &&
-                    thisObject.equals(cacheKey.thisObject) &&
+                    className.equals(cacheKey.className) &&
                     Arrays.equals(arguments, cacheKey.arguments);
         }
 
         @Override
         public int hashCode() {
-            int result = Objects.hash(methodName, thisObject);
+            int result = Objects.hash(methodName, className);
             result = 31 * result + Arrays.hashCode(arguments);
             return result;
         }
