@@ -42,10 +42,10 @@ public class CacheAspect {
 
     public static class CacheKey implements Serializable {
         private String methodName;
-        private Object className;
+        private String className;
         private Object[] arguments;
 
-        public CacheKey(String methodName, Object className, Object[] arguments) {
+        public CacheKey(String methodName, String className, Object[] arguments) {
             this.methodName = methodName;
             this.className = className;
             this.arguments = arguments;
