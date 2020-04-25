@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MyMapper">
     <select id="selectRank" resultMap="rankItem">
-        select goods.name, t.sales_amount
-            from
-            (
-                select goods_id, sum(price*quantity) as sales_amount from `order` group by goods_id order by sales_amount desc
-            ) t
-        left join goods
-        on goods.id=t.goods_id
+        select goods.name, ifnull(t.sales_amount, 0)
+        from (
+                 select goods_id, sum(price * quantity) as sales_amount from `order` group by goods_id
+             ) t
+                 right join goods
+                            on t.goods_id = goods.id
+        order by sales_amount desc
     </select>
 
     <!-- Very Complex Result Map -->
