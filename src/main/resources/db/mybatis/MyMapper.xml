@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MyMapper">
     <select id="selectRank" resultMap="rankItem">
-        select goods.name, ifnull(t.sales_amount, 0)
+        select goods.name, ifnull(t.sales_amount, 0) as gmv
         from (
                  select goods_id, sum(price * quantity) as sales_amount from `order` group by goods_id
              ) t
@@ -16,7 +16,7 @@
     <!-- Very Complex Result Map -->
     <resultMap id="rankItem" type="com.github.hcsp.entity.RankItem">
         <result property="itemName" column="name"/>
-        <result property="itemSalesAmount" column="sales_amount"/>
+        <result property="itemSalesAmount" column="gmv"/>
     </resultMap>
 </mapper>
 

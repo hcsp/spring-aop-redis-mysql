@@ -20,11 +20,11 @@ public class RankController {
     @Autowired
     private RankService rankService;
 
-    @RequestMapping("/")
+    @RequestMapping(path="/rank.htm")
     public ModelAndView index() {
         List<RankItem> items = rankService.getRank();
         Map<String, Object> model = new HashMap<>();
         model.put("items", items);
-        return new ModelAndView("index", model);
+        return new ModelAndView("rank", model);
     }
 }
