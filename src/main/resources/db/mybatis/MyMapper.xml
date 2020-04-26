@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyMapper">
+    <select id="selectRank" resultMap="rankItem">
+        select goods.name, ifnull(t.sales_amount, 0) gmv
+            from goods
+                     left join
+                        (
+                            select goods_id, sum(price * quantity) as sales_amount from `order` group by goods_id
+                        ) t
+                            on goods.id = t.goods_id
+                                order by gmv desc
+    </select>
+
+    <!-- Very Complex Result Map -->
+    <resultMap id="rankItem" type="com.github.hcsp.entity.RankItem">
+        <result property="itemName" column="name"/>
+        <result property="itemSalesAmount" column="gmv"/>
+    </resultMap>
+</mapper>
+
