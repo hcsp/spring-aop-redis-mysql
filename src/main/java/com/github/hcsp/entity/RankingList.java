@@ -3,7 +3,7 @@ package com.github.hcsp.entity;
 import java.io.Serializable;
 
 public class RankingList implements Serializable {
-        private String goodsName;
+    private String goodsName;
     private int Turnover;
 
     public String getGoodsName() {

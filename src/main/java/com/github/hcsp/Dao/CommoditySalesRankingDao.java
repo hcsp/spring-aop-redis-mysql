@@ -15,7 +15,7 @@ public class CommoditySalesRankingDao {
         this.rankMapper = rankMapper;
     }
 
-    public List<RankingList> SortTheAmountOfGoodsSold() {
-        return rankMapper.SortTheAmountOfGoodsSold();
+    public List<RankingList> sortTheAmountOfGoodsSold() {
+        return rankMapper.sortTheAmountOfGoodsSold();
     }
 }

@@ -15,5 +15,5 @@ public interface RankMapper {
             "on `order`.goods_id=goods.id\n" +
             "group by goods.id\n" +
             "order by Turnover desc")
-    List<RankingList> SortTheAmountOfGoodsSold();
+    List<RankingList> sortTheAmountOfGoodsSold();
 }

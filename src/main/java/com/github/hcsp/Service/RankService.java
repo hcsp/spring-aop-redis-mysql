@@ -18,7 +18,7 @@ public class RankService {
     }
 
     @Cache
-    public List<RankingList> SortTheAmountOfGoodsSold() {
-        return commoditySalesRankingDao.SortTheAmountOfGoodsSold();
+    public List<RankingList> sortTheAmountOfGoodsSold() {
+        return commoditySalesRankingDao.sortTheAmountOfGoodsSold();
     }
 }

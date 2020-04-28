@@ -27,7 +27,7 @@ public class RankController {
     @RequestMapping("/rank.htm")
     @ResponseBody
     public Object search(HttpServletRequest request, HttpServletResponse response) {
-        List<RankingList> items = rankService.SortTheAmountOfGoodsSold();
+        List<RankingList> items = rankService.sortTheAmountOfGoodsSold();
         Map<String, Object> model = new HashMap<>();
         model.put("items", items);
         return new ModelAndView("index", model);
