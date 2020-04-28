@@ -21,6 +21,4 @@ public class RankService {
     public List<RankingList> SortTheAmountOfGoodsSold() {
         return commoditySalesRankingDao.SortTheAmountOfGoodsSold();
     }
-
-    ;
 }

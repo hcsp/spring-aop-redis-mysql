@@ -3,8 +3,8 @@ package com.github.hcsp.entity;
 import java.io.Serializable;
 
 public class RankingList implements Serializable {
-    private String goodsName;
-    private Integer Turnover;
+        private String goodsName;
+    private int Turnover;
 
     public String getGoodsName() {
         return goodsName;
@@ -14,11 +14,11 @@ public class RankingList implements Serializable {
         this.goodsName = goodsName;
     }
 
-    public Integer getTurnover() {
+    public int getTurnover() {
         return Turnover;
     }
 
-    public void setTurnover(Integer turnover) {
+    public void setTurnover(int turnover) {
         this.Turnover = turnover;
     }
 }

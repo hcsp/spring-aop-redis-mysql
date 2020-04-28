@@ -24,7 +24,7 @@ public class RankController {
         this.rankService = rankService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/rank.htm")
     @ResponseBody
     public Object search(HttpServletRequest request, HttpServletResponse response) {
         List<RankingList> items = rankService.SortTheAmountOfGoodsSold();

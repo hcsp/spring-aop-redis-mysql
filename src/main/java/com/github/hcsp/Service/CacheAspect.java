@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.concurrent.TimeUnit;
+
 @Aspect
 @Configuration
 public class CacheAspect {
@@ -25,14 +27,11 @@ public class CacheAspect {
 
         String methodName = signature.getName();
         Object cachedValue = redisTemplate.opsForValue().get(methodName);
-        System.out.println(methodName);
         if (cachedValue != null) {
-            System.out.println("1");
             return cachedValue;
         } else {
             Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, realValue);
-            System.out.println("2");
+            redisTemplate.opsForValue().set(methodName, realValue, 1_000_000, TimeUnit.MICROSECONDS);
             return realValue;
 
         }
