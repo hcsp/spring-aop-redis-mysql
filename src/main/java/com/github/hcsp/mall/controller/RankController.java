@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("rank")
 public class RankController {
 
     private final RankService rankService;
@@ -19,7 +18,7 @@ public class RankController {
         this.rankService = rankService;
     }
 
-    @GetMapping
+    @GetMapping("/rank.htm")
     public ModelAndView getRankItems() {
         Map<String, Object> model = new HashMap<>();
         model.put("items", rankService.getRankItems());
