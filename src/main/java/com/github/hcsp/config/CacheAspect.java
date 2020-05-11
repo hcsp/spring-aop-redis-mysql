@@ -7,6 +7,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.concurrent.TimeUnit;
+
 @Aspect
 @Configuration
 public class CacheAspect {
@@ -26,7 +28,7 @@ public class CacheAspect {
         if (cacheValue == null) {
             System.out.println("no cache");
             Object realValue = proceedingJoinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, realValue);
+            redisTemplate.opsForValue().set(methodName, realValue, 1, TimeUnit.SECONDS);
             return realValue;
         } else {
             System.out.println("have cache");
