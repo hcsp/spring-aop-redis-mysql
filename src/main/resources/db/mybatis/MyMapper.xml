@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MyMapper">
     <select id="selectRank" resultMap="RankItem">
-        select g.id as goods_id, g.name as goods_name, sum(o.price*o.quantity) as total_amount
-        from `order` o inner join
+        select g.id as goods_id, g.name as goods_name, COALESCE(o.amount, 0) as total_amount
+        from ( select goods_id, sum(price*quantity) as amount from `order` group by goods_id) o
+                 right join
              goods g on g.id = o.goods_id
-        group by goods_id order by total_amount desc
+        order by total_amount desc
     </select>
     <resultMap id="RankItem" type="com.github.hcsp.entity.RankItem">
         <result property="totalAmount" column="total_amount"/>

@@ -23,7 +23,7 @@ public class RankControllor {
         return rankService.getRank();
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/rank.htm")
     public ModelAndView index() {
         List<RankItem> rankItems = rankService.getRank();
         Map<String, Object> model = new HashMap<>();
