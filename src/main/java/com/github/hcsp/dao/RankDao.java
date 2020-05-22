@@ -15,7 +15,6 @@ public class RankDao {
 
     @Cache()
     public List<RankItem> getRank() {
-        List<RankItem> items = sqlSession.selectList("MyMapper.selectGoodsRank");
-        return items;
+        return sqlSession.selectList("MyMapper.selectRank");
     }
 }
