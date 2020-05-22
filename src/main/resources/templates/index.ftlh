@@ -24,18 +24,24 @@
 <h2>商品排行榜</h2>
 
 <table>
+
+    <thead>
     <tr>
         <th>排名</th>
         <th>商品名</th>
         <th>成交金额</th>
     </tr>
-    <#list items as item>
+    </thead>
+    <tbody>
+    <#list rankItems as rankItem>
         <tr>
-            <td>${item?index + 1}</td>
-            <td>${item.name}</td>
-            <td>${item.prices}</td>
+            <td>${rankItem?index+1}</td>
+            <td>${rankItem.goods.name}</td>
+            <td>${rankItem.totalAmount}</td>
         </tr>
     </#list>
+    </tbody>
+
 </table>
 
 </body>
