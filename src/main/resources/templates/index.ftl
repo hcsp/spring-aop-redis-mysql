@@ -33,7 +33,7 @@
     <tr>
         <td>${item_index + 1}</td>
         <td>${item.goodsName}</td>
-        <td>${item.totalPrice}</td>
+        <td>${item.totalPrice!"0"}</td>
     </tr>
     </#list>
 </table>

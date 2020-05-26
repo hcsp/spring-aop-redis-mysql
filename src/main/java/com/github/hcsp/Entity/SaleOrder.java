@@ -1,11 +1,13 @@
 package com.github.hcsp.Entity;
 
+import java.io.Serializable;
+
 /**
  * @Author: GoFocus
  * @Date: 2020-05-26 14:24
  * @Description:
  */
-public class SaleOrder {
+public class SaleOrder implements Serializable {
 
     private String goodsName;
     private Integer totalPrice;

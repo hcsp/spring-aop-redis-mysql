@@ -1,4 +1,4 @@
-package com.github.hcsp.Service;
+package com.github.hcsp.service;
 
 import com.github.hcsp.Entity.Goods;
 import com.github.hcsp.Entity.SaleOrder;

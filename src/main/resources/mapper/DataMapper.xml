@@ -2,12 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.hcsp.Dao.DataMapper">
+<mapper namespace="com.github.hcsp.dao.DataMapper">
     <select id="getSaleOrder" resultType="com.github.hcsp.Entity.SaleOrder">
-    select (quantity * price) as totalPrice , g.name as goodsName
+    select sum(quantity * price) as totalPrice , g.name as goodsName
         from `order` as o
-        join goods as g
+        right join goods as g
          on o.goods_id = g.id
+         group by g.name
         order by totalPrice desc
     </select>
 </mapper>

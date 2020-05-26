@@ -1,13 +1,11 @@
-package com.github.hcsp.Controller;
+package com.github.hcsp.controller;
 
 import com.github.hcsp.Entity.SaleOrder;
-import com.github.hcsp.Service.DataService;
+import com.github.hcsp.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class DataController {
         return dataService.findAllGoods();
     }
 
-    @GetMapping("/saleOrder")
+    @GetMapping("/rank.htm")
     public String getSaleOrder(Model model) {
         List<SaleOrder> saleOrder = dataService.getSaleOrder();
         model.addAttribute("saleOrder", saleOrder);

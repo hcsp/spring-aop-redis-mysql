@@ -1,4 +1,4 @@
-package com.github.hcsp.Dao;
+package com.github.hcsp.dao;
 
 import com.github.hcsp.Entity.Goods;
 import com.github.hcsp.Entity.SaleOrder;

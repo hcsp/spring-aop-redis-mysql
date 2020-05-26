@@ -1,8 +1,9 @@
-package com.github.hcsp.Service;
+package com.github.hcsp.service;
 
-import com.github.hcsp.Dao.DataMapper;
 import com.github.hcsp.Entity.Goods;
 import com.github.hcsp.Entity.SaleOrder;
+import com.github.hcsp.anno.Cache;
+import com.github.hcsp.dao.DataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
+    @Cache
     public List<SaleOrder> getSaleOrder() {
         return dataMapper.getSaleOrder();
     }
