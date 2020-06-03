@@ -6,5 +6,5 @@ import java.util.List;
 
 
 public interface RankDao {
-    public List<RankItem> getRank();
+    List<RankItem> getRank();
 }
