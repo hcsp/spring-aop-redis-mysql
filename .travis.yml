@@ -4,9 +4,21 @@ cache:
     - $HOME/.m2
 jdk:
   - openjdk8
-install: true
-script: |
-  docker run -d -p 3306:3306 --name=mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=mall mysql
-  docker run -d -p 6379:6379 --name=redis redis
-  sleep 20
-  mvn verify
+script: echo "Running verification"
+jobs:
+  include:
+    - stage: Verify whitelist
+      install: skip
+      script: ./.circleci/verifyWhitelist.sh
+    - stage: Start mysql
+      install: skip
+      script: docker run -d -p 3306:3306 --name=mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=mall mysql
+    - stage: Start redis
+      install: skip
+      script: docker run -d -p 6379:6379 --name=redis redis
+    - stage: Wait for startup
+      install: skip
+      script: sleep 20
+    - stage: Maven verify
+      install: skip
+      script: mvn verify
