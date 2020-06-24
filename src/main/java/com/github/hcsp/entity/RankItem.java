@@ -3,7 +3,6 @@ package com.github.hcsp.entity;
 import java.io.Serializable;
 
 public class RankItem implements Serializable {
-    private int rank;
     private int score;
     private Goods goods;
 
