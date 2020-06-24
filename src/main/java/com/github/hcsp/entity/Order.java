@@ -30,7 +30,7 @@ public class Order implements Serializable {
     }
 
     public void setUserId(Integer userId) {
-        userId = userId;
+        this.userId = userId;
     }
 
     public Integer getPrice() {
