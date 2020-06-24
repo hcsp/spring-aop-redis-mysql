@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Order implements Serializable {
     private Integer id;
     private Integer goodId;
-    private Integer UserId;
+    private Integer userId;
     private Integer price;
     private Integer quantity;
 
@@ -26,11 +26,11 @@ public class Order implements Serializable {
     }
 
     public Integer getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Integer userId) {
-        UserId = userId;
+        userId = userId;
     }
 
     public Integer getPrice() {
