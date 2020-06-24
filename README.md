@@ -74,6 +74,7 @@ tr:nth-child(even) {
 -----
 注意！我们只允许你修改以下文件，对其他文件的修改会被拒绝：
 - [src/main/java](https://github.com/hcsp/spring-aop-redis-mysql/blob/master/src/main/java)
+- [src/main/resources](https://github.com/hcsp/spring-aop-redis-mysql/blob/master/src/main/resources)
 - [pom.xml](https://github.com/hcsp/spring-aop-redis-mysql/blob/master/pom.xml)
 -----
 
