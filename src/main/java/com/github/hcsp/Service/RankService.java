@@ -1,5 +1,6 @@
 package com.github.hcsp.Service;
 
+import com.github.hcsp.anno.Cache;
 import com.github.hcsp.dao.OrderMapper;
 import com.github.hcsp.dao.RankDao;
 import com.github.hcsp.entity.RankItem;
@@ -16,6 +17,7 @@ public class RankService {
     @Autowired
     private RankDao rankDao;
 
+    @Cache
     public List<RankItem> getRank() {
         return rankDao.getRank();
     }
