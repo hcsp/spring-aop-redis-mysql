@@ -5,11 +5,15 @@ package com.github.hcsp.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author sunp
  *
  */
-public class itemRank {
+
+@Component
+public class ItemRank {
     
     private String itemName;
     
@@ -31,8 +35,4 @@ public class itemRank {
         this.totalAmount = totalAmount;
     }
     
-    public List<itemRank> queryItemRank() {
-        
-    }
-
 }
