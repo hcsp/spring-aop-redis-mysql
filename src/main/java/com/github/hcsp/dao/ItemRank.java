@@ -3,6 +3,7 @@
  */
 package com.github.hcsp.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class ItemRank {
+public class ItemRank implements Serializable {
+    
+    private static final long serialVersionUID = -1L;
     
     private String itemName;
     
