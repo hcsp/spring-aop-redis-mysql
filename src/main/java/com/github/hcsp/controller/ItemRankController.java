@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.hcsp.annotation.Cache;
 import com.github.hcsp.dao.ItemRank;
 import com.github.hcsp.dao.ItemRankMapper;
 
@@ -20,12 +21,13 @@ import com.github.hcsp.dao.ItemRankMapper;
 
 @RestController
 public class ItemRankController {
-    
+
     @Autowired
     private ItemRankMapper itemRankMapper;
-    
+
     @RequestMapping("/ItemRankData")
     @ResponseBody
+    @Cache
     public List<ItemRank> index() {
         return itemRankMapper.queryItemRank();
     }

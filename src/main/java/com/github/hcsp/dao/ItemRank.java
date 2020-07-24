@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ItemRank implements Serializable {
-    
+
     private static final long serialVersionUID = -1L;
-    
+
     private String itemName;
-    
+
     private int totalAmount;
 
     public String getItemName() {
@@ -37,5 +37,5 @@ public class ItemRank implements Serializable {
     public void setTotalAmount(int totalAmount) {
         this.totalAmount = totalAmount;
     }
-    
+
 }
