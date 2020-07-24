@@ -23,30 +23,32 @@ tr:nth-child(even) {
 
 	<h2>商品排行榜</h2>
 
-	<table>
-		<tr>
-			<th>排名</th>
-			<th>商品名</th>
-			<th>成交金额</th>
-		</tr>
+	<table border="1" id="RankItem">
 
 	</table>
 
 	<script>
-var xhr = new XMLHttpRequest(); 
-xhr.onreadystatechange=function(){ 
-	if(xhr.readState == 4) {
-		if(xhr.status >= 200 && xhs.status < 300) ||
-		xhr.status ==304) {
-			var json = xhr.responeseText; 
-			console.log(json);
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if ((xhr.status >= 200 && xhr.status < 300)
+						|| xhr.status == 304) {
+					var rank = JSON.parse(xhr.responseText);
+					var txt = "";
+					txt += "<tr><th>排名</th><th>商品名</th><th>成交金额</th></tr>";
+					for (x in rank) {
+						var row = Number(x) + 1;
+						txt += "<tr><td>" + row + "</td><td>"
+								+ rank[x].itemName + "</td><td>"
+								+ rank[x].totalAmount + "</td></tr>";
+					}
+					document.getElementById("RankItem").innerHTML = txt;
+				}
+			}
 		}
-	}
-}
+		xhr.open("GET", "/ItemRankData", true);
+		xhr.send();
+	</script>
 
-xhr.open("get", '/ItemRankData', true);
-xhr.send(null);
-
-</script>
 </body>
 </html>
