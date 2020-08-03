@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.github.hcsp.controller;
 
@@ -25,7 +25,7 @@ public class ItemRankController {
     @Autowired
     private ItemRankMapper itemRankMapper;
 
-    @RequestMapping("/ItemRankData")
+    @RequestMapping("/rank")
     @ResponseBody
     @Cache
     public List<ItemRank> index() {

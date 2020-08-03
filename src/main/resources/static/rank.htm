@@ -46,8 +46,11 @@ tr:nth-child(even) {
 				}
 			}
 		}
-		xhr.open("GET", "/ItemRankData", true);
-		xhr.send();
+		xhr.open("GET", "/rank", true);
+		xhr.onload = function () {
+			   // 请求结束后,在此处写处理代码
+			};
+		xhr.send(null);
 	</script>
 
 </body>
