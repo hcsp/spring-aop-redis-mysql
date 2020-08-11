@@ -3,33 +3,27 @@
  */
 package com.github.hcsp.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.github.hcsp.annotation.Cache;
-import com.github.hcsp.dao.ItemRank;
-import com.github.hcsp.dao.ItemRankMapper;
+import com.github.hcsp.dao.RankDao;
 
 /**
  * @author sunp
  *
  */
 
-@RestController
+@Controller
 public class ItemRankController {
 
     @Autowired
-    private ItemRankMapper itemRankMapper;
+    private RankDao rankDao;
 
-    @RequestMapping("/rank")
-    @ResponseBody
-    @Cache
-    public List<ItemRank> index() {
-        return itemRankMapper.queryItemRank();
+    @RequestMapping("/rank.htm")
+    public String index(ModelMap map) {
+        map.put("itemList", rankDao.queryRankList());
+        return "index";
     }
-
 }

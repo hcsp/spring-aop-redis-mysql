@@ -7,7 +7,6 @@
         <setting name="logImpl" value="LOG4J"/>
     </settings>
     <mappers>
-    <mapper resource="db/mybatis/ItemRankMapper.xml"/>
     <mapper class="com.github.hcsp.dao.ItemRankMapper"/>
   </mappers>
 </configuration>
