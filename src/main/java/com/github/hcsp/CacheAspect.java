@@ -3,6 +3,8 @@
  */
 package com.github.hcsp;
 
+import java.util.concurrent.TimeUnit;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -31,7 +33,7 @@ public class CacheAspect {
             return cacheValue;
         } else {
             Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().getAndSet(methodName, realValue);
+            redisTemplate.opsForValue().set(methodName, realValue, 1, TimeUnit.SECONDS);
             return realValue;
         }
 
