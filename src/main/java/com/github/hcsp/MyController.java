@@ -19,7 +19,7 @@ public class MyController {
     @GetMapping("rank.htm")
     public ModelAndView index() {
         List<Order> rankList = orderService.getRankList();
-        HashMap<String, Object> params =new HashMap<>();
+        HashMap<String, Object> params = new HashMap<>();
         params.put("rankList", rankList);
         return new ModelAndView("rank", params);
     }
