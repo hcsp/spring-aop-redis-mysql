@@ -31,12 +31,12 @@
         <th>成交金额</th>
     </tr>
     <#list items as item>
-    <tr>
-        <td>${item?index + 1}</td>
-        <td>${item.goods.name}</td>
-        <td>${item.totalPrice}</td>
-    </tr>
-</#list>
+        <tr>
+            <td>${item?index + 1}</td>
+            <td>${item.goods.name}</td>
+            <td>${item.totalPrice}</td>
+        </tr>
+    </#list>
 </table>
 </body>
 </html>

@@ -8,10 +8,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 // 这里可以声明一个复杂的bean
 @Configuration
 public class MyConfiguration {
-//    @Bean
-//    public RankDao getRankDao() {
-//        return null;
-//    }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
