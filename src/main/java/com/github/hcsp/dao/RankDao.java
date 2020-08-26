@@ -15,7 +15,6 @@ public class RankDao {
 
     public List<RankItem> getRankByDao() {
         // 请求数据库
-        List<Object> objects = sqlSession.selectList("MyMapper.getOrderRank");
         return sqlSession.selectList("MyMapper.getOrderRank");
     }
 }
