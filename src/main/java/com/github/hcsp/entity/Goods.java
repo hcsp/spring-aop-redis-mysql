@@ -23,3 +23,4 @@ public class Goods implements Serializable {
     this.name = name;
   }
 }
+

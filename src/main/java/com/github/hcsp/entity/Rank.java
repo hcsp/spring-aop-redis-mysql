@@ -24,3 +24,4 @@ public class Rank implements Serializable {
     this.goods = goods;
   }
 }
+
