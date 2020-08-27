@@ -17,3 +17,4 @@ public class RankDao {
     return sqlSession.selectList("RankMapper.getRank");
   }
 }
+
