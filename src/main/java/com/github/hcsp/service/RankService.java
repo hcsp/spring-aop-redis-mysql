@@ -21,7 +21,7 @@ public class RankService {
     private RankDao rankDao;
 
     @Cache
-    public List<RankItem> selectRank(){
+    public List<RankItem> selectRank() {
         return rankDao.getRank();
     }
 

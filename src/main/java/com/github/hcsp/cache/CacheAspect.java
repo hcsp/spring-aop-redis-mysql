@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Aspect
@@ -24,12 +22,13 @@ public class CacheAspect {
         MethodSignature signature = (MethodSignature) point.getSignature();
         String methodName = signature.getName();
         Object cacheValue = redisTemplate.opsForValue().get(methodName);
-        if(cacheValue != null) {
+        if (cacheValue != null) {
             return cacheValue;
         } else {
             cacheValue = point.proceed();
-            redisTemplate.opsForValue().set(methodName,cacheValue,signature.getMethod().getAnnotation(Cache.class).value(),
-                    TimeUnit.SECONDS);
+            redisTemplate.opsForValue()
+                    .set(methodName, cacheValue, signature.getMethod().getAnnotation(Cache.class).value(),
+                            TimeUnit.SECONDS);
             return cacheValue;
         }
     }
