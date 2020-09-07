@@ -9,7 +9,7 @@ create table user
 -- 商品表
 create table goods
 (
-    id bigint auto_increment primary key,
+    id   bigint auto_increment primary key,
     name varchar(100) comment '商品名'
 ) DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
