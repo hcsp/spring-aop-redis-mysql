@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RankItemMapper">
+    <select id="selectRank" resultMap="rankItem">
+        SELECT t.name, (t.price*t.total_quantity) as total_price
+        FROM
+            (SELECT g.name, o.price, sum(o.quantity) as total_quantity FROM `order` o LEFT JOIN  goods g on o.goods_id = g.id GROUP BY name,price) t
+        ORDER BY total_price desc
+    </select>
+
+    <resultMap id="rankItem" type="com.github.hcsp.entity.RankItem">
+        <result property="total_price" column="total_price"/>
+        <association property="goods" javaType="com.github.hcsp.entity.Goods">
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+</mapper>
