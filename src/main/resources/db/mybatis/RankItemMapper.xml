@@ -11,7 +11,7 @@
     </select>
 
     <resultMap id="rankItem" type="com.github.hcsp.entity.RankItem">
-        <result property="total_price" column="total_price"/>
+        <result property="totalPrice" column="total_price"/>
         <association property="goods" javaType="com.github.hcsp.entity.Goods">
             <result property="name" column="name"/>
         </association>

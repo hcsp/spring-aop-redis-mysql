@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class RankItem implements Serializable {
     private Goods goods;
-    private BigDecimal total_price;
+    private BigDecimal totalPrice;
 
     public Goods getGoods() {
         return goods;
@@ -15,11 +15,11 @@ public class RankItem implements Serializable {
         this.goods = goods;
     }
 
-    public BigDecimal getTotal_price() {
-        return total_price;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotal_price(BigDecimal total_price) {
-        this.total_price = total_price;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
