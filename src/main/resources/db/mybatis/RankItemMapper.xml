@@ -9,7 +9,7 @@
         right join goods g
         on o.goods_id = g.id
         group by g.id
-        order by total_price desc;
+        order by total_price desc
     </select>
 
     <resultMap id="rankItem" type="com.github.hcsp.entity.RankItem">

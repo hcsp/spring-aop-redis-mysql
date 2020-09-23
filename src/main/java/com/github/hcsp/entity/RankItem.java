@@ -1,11 +1,10 @@
 package com.github.hcsp.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class RankItem implements Serializable {
     private Goods goods;
-    private BigDecimal totalPrice;
+    private int totalPrice;
 
     public Goods getGoods() {
         return goods;
@@ -15,11 +14,11 @@ public class RankItem implements Serializable {
         this.goods = goods;
     }
 
-    public BigDecimal getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 }
