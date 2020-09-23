@@ -1,6 +1,5 @@
 package com.github.hcsp;
 
-import com.github.hcsp.anno.Cache;
 import com.github.hcsp.entity.RankItem;
 import com.github.hcsp.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
