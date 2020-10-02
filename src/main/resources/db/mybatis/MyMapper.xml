@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyMapper">
+    <select id="selectRank" resultMap="goodsRank">
+        select goods.name as goods_name, t.total
+        from (select goods_id, sum(price * quantity) as total from `order` group by goods_id) t
+                 right join goods
+                            on t.goods_id = goods.id
+        order by total desc;
+    </select>
+    <resultMap id="goodsRank" type="rank" autoMapping="true">
+        <result property="total" column="total"/>
+        <result property="goodsName" column="goods_name"/>
+    </resultMap>
+</mapper>
