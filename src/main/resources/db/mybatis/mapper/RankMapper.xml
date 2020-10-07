@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.hcsp.dao.mapper.RankMapper">
+    <resultMap type="com.github.hcsp.entity.RankItem" id="rank">
+        <result column="earnings" property="earnings"/>
+        <association property="goods" javaType="com.github.hcsp.entity.Goods">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+    <select id="getRank" resultMap="rank">
+        select g.name, g.id, sum(o.price * o.quantity) as earnings
+        from `order` as o
+                 right join goods g on o.goods_id = g.id
+        group by g.name, g.id
+        order by earnings desc
+    </select>
+
+</mapper>
