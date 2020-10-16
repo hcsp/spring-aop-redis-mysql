@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyMapper">
+    <select id="selectRank" resultMap="Item">
+        select goods.name as goods_name,sum(price * quantity) as total_price
+            from `order`
+            right join goods
+            on goods.id = order.goods_id
+            group by goods.id
+            order by total_price desc
+    </select>
+    <resultMap id="Item" type="com.github.hcsp.entity.Item">
+        <result property="itemName" column="goods_name"/>
+        <result property="totalPrice" column="total_price"/>
+    </resultMap>
+</mapper>
