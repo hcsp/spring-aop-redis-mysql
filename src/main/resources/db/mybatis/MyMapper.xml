@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.hcsp.OrderDao">
+    <select id="getGoodsRankByDesc" resultMap="order">
+        select goods.name as goods_name,t.totalPrice from
+        (select goods_id, sum(price*quantity) as totalPrice from `order` group by goods_id) t
+        right join goods
+        on t.goods_id=goods.id
+        order by totalPrice desc;
+    </select>
+    <resultMap id="order" type="com.github.hcsp.entity.Order" autoMapping="true">
+        <result property="totalPrice" column="totalPrice"/>
+        <result property="goodsName" column="goods_name"/>
+    </resultMap>
+</mapper>
