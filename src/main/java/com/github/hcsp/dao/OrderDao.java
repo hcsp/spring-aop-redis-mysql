@@ -13,6 +13,6 @@ public class OrderDao {
     private SqlSession sqlSession;
 
     public List<Order> getGoodsRankByDesc() {
-        return  sqlSession.selectList("com.github.hcsp.OrderDao.getGoodsRankByDesc");
+        return sqlSession.selectList("com.github.hcsp.OrderDao.getGoodsRankByDesc");
     }
 }

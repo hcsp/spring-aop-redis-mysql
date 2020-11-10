@@ -33,7 +33,7 @@
     <#list items as item>
     <tr>
         <td>${item?index+1}</td>
-        <td>${item.goodName}</td>
+        <td>${item.goodsName}</td>
         <td>${item.goodTotal}</td>
     </tr>
     </#list>
