@@ -5,7 +5,7 @@
 <mapper namespace="com.github.hcsp.OrderDao">
     <select id="getGoodsRankByDesc" resultMap="order">
         select goods.name as goods_name,t.totalPrice from
-        (select goods_id, ifnull((sum(price * quantity)), 0) as totalPrice from `order` group by goods_id) t
+        (select goods_id, sum(price * quantity) as totalPrice from `order` group by goods_id) t
         right join goods
         on t.goods_id=goods.id
         order by totalPrice desc;

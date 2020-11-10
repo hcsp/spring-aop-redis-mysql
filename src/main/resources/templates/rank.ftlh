@@ -34,7 +34,11 @@
     <tr>
         <td>${item?index+1}</td>
         <td>${item.goodsName}</td>
+        <#if item.totalPrice??>
         <td>${item.totalPrice}</td>
+        <#else>
+        <td>0</td>
+    </#if>
     </tr>
     </#list>
 </table>

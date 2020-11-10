@@ -4,17 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Order implements Serializable {
-    private Integer id;
     private String goodsName;
     private BigDecimal totalPrice;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getGoodsName() {
         return goodsName;
@@ -35,7 +26,6 @@ public class Order implements Serializable {
     @Override
     public String toString() {
         return "Order{"
-               + "id=" + id
                + ", goodsName='"
                + goodsName
                + '\''
