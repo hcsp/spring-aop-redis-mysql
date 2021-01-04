@@ -34,7 +34,7 @@
         <tr>
             <td>${ranks_index + 1}</td>
             <td>${ranks.name!''}</td>
-            <td>${ranks.total!''}</td>
+            <td>${ranks.total!'0'}</td>
         </tr>
     </#list>
 </table>

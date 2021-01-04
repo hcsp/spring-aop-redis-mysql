@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.hcsp.mapper.GoodsRankMapper">
     <select id="selectGoodsRankList" resultType="com.github.hcsp.entity.GoodsRank">
-        SELECT g.name as name, sum(price * quantity) as total
-        FROM `order` inner join goods g on g.id = `order`.goods_id
+        SELECT g.name, sum(price * quantity) as total
+        FROM `order` right join goods g on g.id = `order`.goods_id
         group by g.name
         order by total desc
     </select>
