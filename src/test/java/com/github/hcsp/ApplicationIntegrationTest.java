@@ -30,7 +30,7 @@ public class ApplicationIntegrationTest {
 
     @Test
     public void test() throws Exception {
-        String url = "http://localhost:" + environment.getProperty("local.server.port") + "/rank.htm";
+        String url = "http://localhost:" + environment.getProperty("local.server.port") + "/rank.ftlh";
 
         // 第一次访问
         Document html = Jsoup.parse(new URL(url), 60 * 1000);
