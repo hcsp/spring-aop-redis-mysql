@@ -1,7 +1,9 @@
 package com.github.hcsp.entity;
 
 
-public class Goods {
+import java.io.Serializable;
+
+public class Goods implements Serializable {
 
   public Goods(){}
   private int totalPrice;
@@ -24,6 +26,4 @@ public class Goods {
   }
 
 
-  public class Item {
-  }
 }
