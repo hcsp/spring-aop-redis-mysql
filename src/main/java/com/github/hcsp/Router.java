@@ -1,28 +1,27 @@
 package com.github.hcsp;
 
-import com.github.hcsp.dao.UserMapper;
+import com.github.hcsp.entity.GoodsItem;
 import com.github.hcsp.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class Router {
     @Autowired
     private RecordService recordService;
 
-    @Autowired
-    private UserMapper userMapper;
-
-    @RequestMapping(path = { "/router/{id}"}, method = RequestMethod.GET)
+    @RequestMapping("/")
     @ResponseBody
-    public Object responsUser(@PathVariable("id") Integer id) {
-        System.out.println(id + "--参数");
-        return userMapper.getUserByid(id);
-    }
+    public ModelAndView responsList() {
+        List<GoodsItem> list = recordService.getRecords();
 
-    @RequestMapping("/getTableData")
-    @ResponseBody
-    public Object responsList() {
-        return recordService.getRecords();
-    }
+        HashMap<String, Object> model= new HashMap<>();
+
+        model.put("goodsList", list);
+        return new ModelAndView("rank", model);
+    };
 }

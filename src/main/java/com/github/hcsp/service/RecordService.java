@@ -1,7 +1,8 @@
 package com.github.hcsp.service;
 
-import com.github.hcsp.dao.RecordDao;
-import com.github.hcsp.entity.RecordItem;
+import com.github.hcsp.anno.Catch;
+import com.github.hcsp.dao.RecordMepper;
+import com.github.hcsp.entity.GoodsItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +11,11 @@ import java.util.List;
 @Service
 public class RecordService {
     @Autowired
-    private RecordDao recordDao;
+    private RecordMepper recordMepper;
 
-    public List<RecordItem> getRecords() {
-        return recordDao.RecordDao();
-    }
+    @Catch
+    public List<GoodsItem> getRecords() {
+        return recordMepper.queryRecordAll();
+    };
 
 }
