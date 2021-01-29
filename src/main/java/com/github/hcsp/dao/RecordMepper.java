@@ -11,15 +11,15 @@ import java.util.List;
 @Mapper
 public interface RecordMepper {
 
-    @Select("SELECT\n" +
-            "SUM(`order`.price * `order`.quantity) as total,\n" +
-            "goods.id as goods_id,\n" +
-            "goods.name as goods_name\n" +
-            "FROM `order`\n" +
-            "LEFT JOIN goods\n" +
-            "ON `order`.goods_id = goods.id\n" +
-            "GROUP BY `order`.goods_id\n" +
-            "ORDER BY total DESC")
+    @Select("SELECT\n"
+            + "SUM(`order`.price * `order`.quantity) as total,\n"
+            + "goods.id as goods_id,\n"
+            + "goods.name as goods_name\n"
+            + "FROM `order`\n"
+            + "LEFT JOIN goods\n"
+            + "ON `order`.goods_id = goods.id\n"
+            + "GROUP BY `order`.goods_id\n"
+            + "ORDER BY total DESC")
     @Results({
         @Result(property = "price", column = "total"),
         @Result(property = "name", column = "goods_name"),

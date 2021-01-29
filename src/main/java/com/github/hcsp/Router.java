@@ -19,7 +19,7 @@ public class Router {
     public ModelAndView responsList() {
         List<GoodsItem> list = recordService.getRecords();
 
-        HashMap<String, Object> model= new HashMap<>();
+        HashMap<String, Object> model = new HashMap<>();
 
         model.put("goodsList", list);
         return new ModelAndView("rank", model);

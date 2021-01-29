@@ -18,12 +18,12 @@ import java.util.concurrent.TimeUnit;
  */
 @Aspect
 @Configuration
-public class CatchAspect {
+public class CacheAspect {
     @Autowired
     RedisTemplate<String, List<GoodsItem>> redisTemplate;
 
     //声明标志  缓存注解
-    @Around("@annotation(com.github.hcsp.anno.Catch)")
+    @Around("@annotation(com.github.hcsp.anno.Cache)")
     public List<GoodsItem> Catch(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         //拿到调用的方法名与参数  进行反射 增加方法
