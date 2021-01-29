@@ -14,14 +14,19 @@ public class Router {
     @Autowired
     private RecordService recordService;
 
-    @RequestMapping("/")
-    @ResponseBody
+    @GetMapping("/rank.htm")
     public ModelAndView responsList() {
         List<GoodsItem> list = recordService.getRecords();
 
         HashMap<String, Object> model = new HashMap<>();
 
-        model.put("goodsList", list);
+        model.put("goods", list);
         return new ModelAndView("rank", model);
+    };
+
+    @GetMapping("/test")
+    @ResponseBody
+    public Object test() {
+        return recordService.getRecords();
     };
 }
