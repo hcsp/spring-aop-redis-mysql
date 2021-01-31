@@ -14,13 +14,13 @@ public class RankController {
     private RankService rankService;
 
     @GetMapping("/user")
-    public Object getUser(){
+    public Object getUser() {
         return rankService.getUserById(1);
     }
 
     @GetMapping("/getRank")
     @ResponseBody
-    public Object getGoodsRank(){
+    public Object getGoodsRank() {
         return rankService.getRank();
     }
 }
