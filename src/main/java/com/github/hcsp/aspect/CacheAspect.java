@@ -12,7 +12,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Aspect
 @Configuration
 public class CacheAspect {
-    //    private Map<String, Object> cache = new HashMap<>();
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
