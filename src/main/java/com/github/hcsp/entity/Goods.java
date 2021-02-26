@@ -21,12 +21,4 @@ public class Goods implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

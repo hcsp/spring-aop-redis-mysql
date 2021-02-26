@@ -18,7 +18,7 @@ public class HelloController {
     private RankService rankService;
 
 
-    @RequestMapping("/")
+    @RequestMapping("/rank.htm")
     public ModelAndView search() {
         List<RankItem> items = rankService.getRank();
         HashMap<String, Object> model = new HashMap<>();

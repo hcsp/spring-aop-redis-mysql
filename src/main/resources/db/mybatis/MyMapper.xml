@@ -10,7 +10,7 @@
         select goods_id,sum(price*quantity) as trading_volume
         from `order` group by goods_id
         ) t
-        inner join goods
+        right join goods
         on goods.id = t.goods_id
         order by trading_volume desc
     </select>
