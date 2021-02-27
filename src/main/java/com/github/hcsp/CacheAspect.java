@@ -1,41 +1,34 @@
 package com.github.hcsp;
 
-import com.github.hcsp.anno.Cache;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
-
-import java.util.concurrent.TimeUnit;
 
 @Aspect
 @Configuration
 public class CacheAspect {
     @Autowired
-    RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
-        long staleTime =signature.getMethod().getAnnotation(Cache.class).staleTime();
+        String signature = joinPoint.getSignature().toString();
+        Long cachedTime = (Long) redisTemplate.opsForHash().get(signature, "cachedTime");
+        Object cachedValue = redisTemplate.opsForHash().get(signature, "cachedValue");
 
-        String methodName = signature.getName();
-
-        Object cacheValue = redisTemplate.opsForValue().get(methodName);
-
-        if (cacheValue != null) {
+        if (cachedTime != null && System.currentTimeMillis() - cachedTime <= 1000) {
             System.out.println("Get value from Cache!");
-            return cacheValue;
+            return cachedValue;
         } else {
             System.out.println("Get value from database!");
-            Object realValue = joinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, realValue, staleTime, TimeUnit.SECONDS);
-            return realValue;
+            Object newValue = joinPoint.proceed();
+            redisTemplate.opsForHash().put(signature, "cachedTime", System.currentTimeMillis());
+            redisTemplate.opsForHash().put(signature, "cachedValue", newValue);
+            return newValue;
         }
     }
-
 }
