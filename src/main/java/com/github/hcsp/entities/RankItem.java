@@ -6,6 +6,14 @@ public class RankItem implements Serializable {
     String goods_name;
     int total_price;
 
+    public RankItem() {
+    }
+
+    public RankItem(String goods_name, int total_price) {
+        this.goods_name = goods_name;
+        this.total_price = total_price;
+    }
+
     public String getGoods_name() {
         return goods_name;
     }
