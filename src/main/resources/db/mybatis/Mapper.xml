@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mapper">
+    <select id="selectOrderRank" resultType="com.github.hcsp.entities.RankItem">
+        select goods_name, sum(sum_price) as total_price
+        from (select g.name as goods_name, goods_id, price * quantity as sum_price
+              from `order`
+                       inner join goods g on `order`.goods_id = g.id
+                       inner join user u on `order`.user_id = u.id) t
+        group by goods_id
+        order by total_price desc;
+    </select>
+</mapper>
