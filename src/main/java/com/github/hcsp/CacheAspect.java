@@ -3,42 +3,34 @@ package com.github.hcsp;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Objects;
 
+@Component
 @Aspect
-@Configuration
 public class CacheAspect {
     @Resource
-    RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Around("@annotation(com.github.hcsp.annotations.Cache)")
-    public Object cache(ProceedingJoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        String methodName = signature.getName();
-        Object cacheValue = redisTemplate.opsForValue().get(methodName);
+    public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        if (cacheValue != null) {
-            System.out.println("Get value from cache");
-            return cacheValue;
+        String signature = joinPoint.getSignature().toString();
+        Long cachedTime = (Long) redisTemplate.opsForHash().get(signature, "cachedTime");
+        Object cachedValue = redisTemplate.opsForHash().get(signature, "cachedValue");
+
+        if (cachedTime != null && System.currentTimeMillis() - cachedTime <= 1000) {
+            System.out.println("Get value from Cache!");
+            return cachedValue;
         } else {
-            System.out.println("Get value from database");
-            return getCacheFromDatabase(joinPoint, methodName);
+            System.out.println("Get value from database!");
+            Object newValue = joinPoint.proceed();
+            redisTemplate.opsForHash().put(signature, "cachedTime", System.currentTimeMillis());
+            redisTemplate.opsForHash().put(signature, "cachedValue", newValue);
+            return newValue;
         }
-    }
-
-    private Object getCacheFromDatabase(ProceedingJoinPoint joinPoint, String methodName) {
-        Object realValue = null;
-        try {
-            realValue = joinPoint.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        redisTemplate.opsForValue().set(methodName, Objects.requireNonNull(realValue));
-        return realValue;
     }
 }
+
