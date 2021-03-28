@@ -15,12 +15,11 @@ import java.util.List;
 @Repository
 public class RankOrderDao {
     String sqlStatement = "select goods_name, sum(sum_price) as total_price\n" +
-            "from (select g.name as goods_name, goods_id, price * quantity as sum_price\n" +
-            "      from `order`\n" +
-            "               inner join goods g on `order`.goods_id = g.id\n" +
-            "               inner join user u on `order`.user_id = u.id) t\n" +
-            "group by goods_id\n" +
-            "order by total_price desc;";
+            "        from (select g.name as goods_name, COALESCE(price * quantity, 0) as sum_price\n" +
+            "              from `order`\n" +
+            "                       right join goods g on `order`.goods_id = g.id) t\n" +
+            "        group by goods_name\n" +
+            "        order by total_price desc;";
 
     List<RankItem> rankItemList = new LinkedList<>();
 
