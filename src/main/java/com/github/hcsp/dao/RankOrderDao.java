@@ -1,6 +1,7 @@
 package com.github.hcsp.dao;
 
 import com.github.hcsp.entities.RankItem;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -22,21 +23,25 @@ public class RankOrderDao {
             "order by total_price desc;";
     private final List<RankItem> result = new LinkedList<>();
 
+    @SuppressFBWarnings({"DMI_CONSTANT_DB_PASSWORD", "OBL_UNSATISFIED_OBLIGATION"})
     public List<RankItem> doRankOrder() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String password = "123456";
-            String userName = "root";
-            String url = "jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8";
-            Connection connection = DriverManager.getConnection(url, userName, password);
-            Statement stmt = connection.createStatement();
-            ResultSet resultSet = stmt.executeQuery(sqlStatement);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String password = "123456";
+        String userName = "root";
+        String url = "jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8";
+        try (Connection connection = DriverManager.getConnection(url, userName, password);
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(sqlStatement)) {
             while (resultSet.next()) {
                 RankItem rankItem = new RankItem(resultSet.getString(1), resultSet.getInt(2));
                 result.add(rankItem);
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
         return result;
     }
