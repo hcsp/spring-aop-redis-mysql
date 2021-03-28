@@ -24,7 +24,7 @@ public class RankOrderDao {
 
     public List<RankItem> doRankOrder() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             String password = "123456";
             String userName = "root";
             String url = "jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8";

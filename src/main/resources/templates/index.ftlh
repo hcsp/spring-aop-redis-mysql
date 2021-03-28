@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <title>商品排行榜</title>
     <style>
@@ -35,8 +35,8 @@
     <#list items as item>
         <tr>
             <td>${item?index+1}</td>
-            <td>${item.user.name}</td>
-            <td>${item.score}</td>
+            <td>${item.goods_name}</td>
+            <td>${item.total_price}</td>
         </tr>
     </#list>
     </tbody>
