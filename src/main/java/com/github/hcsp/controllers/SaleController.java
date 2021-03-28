@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class HelloController {
+public class SaleController {
     @Resource
     private RankOrderService rankOrderService;
 
-    @RequestMapping("/")
+    @RequestMapping("/rank.htm")
     public ModelAndView selectOrderRank() {
         List<RankItem> results = rankOrderService.doService();
         Map<String, Object> model = new HashMap<>();
