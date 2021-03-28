@@ -21,7 +21,8 @@ public class RankOrderDao {
             "               inner join user u on `order`.user_id = u.id) t\n" +
             "group by goods_id\n" +
             "order by total_price desc;";
-    private final List<RankItem> result = new LinkedList<>();
+
+    List<RankItem> rankItemList = new LinkedList<>();
 
     @SuppressFBWarnings({"DMI_CONSTANT_DB_PASSWORD", "OBL_UNSATISFIED_OBLIGATION"})
     public List<RankItem> doRankOrder() {
@@ -36,13 +37,15 @@ public class RankOrderDao {
         try (Connection connection = DriverManager.getConnection(url, userName, password);
              Statement stmt = connection.createStatement();
              ResultSet resultSet = stmt.executeQuery(sqlStatement)) {
+            List<RankItem> result = new LinkedList<>();
             while (resultSet.next()) {
                 RankItem rankItem = new RankItem(resultSet.getString(1), resultSet.getInt(2));
                 result.add(rankItem);
             }
+            rankItemList = result;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        return result;
+        return rankItemList;
     }
 }
