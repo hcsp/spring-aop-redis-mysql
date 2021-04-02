@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品排行榜</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<h1>排行榜</h1>
+<table id="rank">
+    <tr>
+        <th>排名</th>
+        <th>商品名</th>
+        <th>成交金额</th>
+    </tr>
+</table>
+
+<script>
+
+  var renderRank = function (data) {
+    var table = document.getElementById('rank');
+    data.forEach(function (item, index) {
+      var trString = `<tr>
+                <td>${index + 1}</td>
+                <td>${item.name}</td>
+                <td>${item.gmv}</td>
+            </tr>`;
+      table.querySelector('tbody').innerHTML += trString;
+    });
+  };
+
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        var json = xhr.responseText;
+        console.log(JSON.parse(json));
+        renderRank(JSON.parse(json));
+      } else {
+        console.log('服务器异常');
+      }
+    }
+  };
+  xhr.open('GET', '/rankData');
+  xhr.send();
+
+</script>
+</body>
+</html>
