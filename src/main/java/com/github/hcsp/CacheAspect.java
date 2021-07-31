@@ -21,7 +21,6 @@ public class CacheAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String methodName = signature.getName();
         Object cachedValue = redisTemplate.opsForValue().get(methodName);
-//        redisTemplate.expire(methodName, 1, TimeUnit.SECONDS);
         if (cachedValue != null) {
             System.out.println(2);
             return cachedValue;
