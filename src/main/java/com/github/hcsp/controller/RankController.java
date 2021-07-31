@@ -16,7 +16,7 @@ public class RankController {
     @Autowired
     RankService rankService;
 
-    @RequestMapping("/rank")
+    @RequestMapping("/rank.htm")
     public ModelAndView index() {
         List<GoodsRank> items = rankService.getRank();
         Map<String, Object> map = new HashMap<>();
