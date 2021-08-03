@@ -1,5 +1,6 @@
 package com.github.hcsp.service;
 
+import com.github.hcsp.annotation.Cache;
 import com.github.hcsp.dao.RankMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class RankService {
         this.rankMapper = rankMapper;
     }
 
+    @Cache
     public List<Map> getRankList() {
         return rankMapper.getRankList();
     }
