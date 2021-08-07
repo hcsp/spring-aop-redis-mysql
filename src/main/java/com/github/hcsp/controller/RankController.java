@@ -1,6 +1,5 @@
 package com.github.hcsp.controller;
 
-import com.github.hcsp.annotation.Cache;
 import com.github.hcsp.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ public class RankController {
 
 
     @RequestMapping("/list")
-    @Cache
     public ModelAndView rankList() {
         List<Map> rankList = rankService.getRankList();
         Map<String, Object> map = new HashMap<>();
