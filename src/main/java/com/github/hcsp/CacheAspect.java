@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author Zhaofeng Zhou
  * @date 2021/8/3/003 22:48
@@ -32,6 +34,7 @@ public class CacheAspect {
             System.out.println("get data from database");
             Object realValue = joinPoint.proceed();
             redisTemplate.opsForValue().set(methodName, realValue);
+            redisTemplate.expire(methodName, 1, TimeUnit.SECONDS);
             return realValue;
         }
 

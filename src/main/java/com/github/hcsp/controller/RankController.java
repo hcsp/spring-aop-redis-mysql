@@ -15,7 +15,6 @@ import java.util.Map;
  * @date 2021/8/2/002 21:39
  */
 @Controller
-@RequestMapping("/rank")
 public class RankController {
     private RankService rankService;
 
@@ -25,7 +24,7 @@ public class RankController {
     }
 
 
-    @RequestMapping("/list")
+    @RequestMapping("/rank.htm")
     public ModelAndView rankList() {
         List<Map> rankList = rankService.getRankList();
         Map<String, Object> map = new HashMap<>();

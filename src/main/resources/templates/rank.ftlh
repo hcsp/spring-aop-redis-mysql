@@ -34,7 +34,11 @@
         <tr>
             <td>${item_index +1}</td>
             <td>${item.name}</td>
-            <td>${item.totalPrice}</td>
+            <#if item.totalPrice??>
+                <td>${item.totalPrice}</td>
+            <#else>
+                <td>0</td>
+            </#if>
         </tr>
     </#list>
 </table>

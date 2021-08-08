@@ -13,7 +13,9 @@ import java.util.Map;
 @Mapper
 public interface RankMapper {
 
-    @Select("SELECT g.name,SUM(o.price) as totalPrice FROM `order` o inner join goods g ON o.goods_id = g.id " +
+    @Select("SELECT g.name,SUM(o.price * o.quantity) as totalPrice " +
+            "FROM `order` o " +
+            "right join goods g ON o.goods_id = g.id " +
             "GROUP BY g.id " +
             "ORDER BY totalPrice desc")
     List<Map> getRankList();
