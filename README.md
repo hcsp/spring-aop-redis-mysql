@@ -27,11 +27,5 @@
    - Spring MyBatis config => ` mybatis.config-location=classpath:db/mybatis/config.xml `
    - MyBatis SqlSession Dao => com.github.hcsp.dao.GoodsSalesDao
 4. 业务代码 Service => com.github.hcsp.service.GoodsSalesService
-5. 创建接口 getGoodsSalesList => ApplicationController
-
-
-
-
-
-   
-
+5. 创建接口 getGoodsSalesList => ApplicationController => ` http://localhost:8080/getGoodsSalesList `
+6. rank.html 使用 ` /getGoodsSalesList ` 接口 => ` http://localhost:8080/rank.html ` => 获取数据库数据
