@@ -17,6 +17,9 @@
 5. 测试是否导入成功 => ` select * from user ` + ` select * from goods ` + ` select * from order `
 
 ### 启动 Spring 并展示界面
-1. 添加 ApplicationController => https://spring.io/guides/gs/spring-boot/ => ` http://localhost:8080 `
-2. 添加 rank.html => ` http://localhost:8080/rank.html `
+1. 创建 ApplicationController => https://spring.io/guides/gs/spring-boot/ => ` http://localhost:8080 `
+2. 创建 rank.html => ` http://localhost:8080/rank.html `
+3. 使用 MyBatis => https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
+   - Spring Boot MyBatis starter => https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter/2.2.0
+   - MyBatis config 
 
