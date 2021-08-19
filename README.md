@@ -25,4 +25,6 @@
    - MyBatis Mapper file
    - MyBatis Mapper resultType entity => GoodsSales
    - Spring MyBatis config => ` mybatis.config-location=classpath:db/mybatis/config.xml `
+   - MyBatis SqlSession Dao => com.github.hcsp.Dao.GoodsSalesDao
+   
 
