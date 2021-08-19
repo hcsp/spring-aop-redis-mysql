@@ -24,4 +24,5 @@
    - MyBatis config file => https://mybatis.org/mybatis-3/getting-started.html
    - MyBatis Mapper file
    - MyBatis Mapper resultType entity => GoodsSales
+   - Spring MyBatis config => ` mybatis.config-location=classpath:db/mybatis/config.xml `
 
