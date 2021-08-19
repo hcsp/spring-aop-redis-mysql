@@ -25,6 +25,13 @@
    - MyBatis Mapper file
    - MyBatis Mapper resultType entity => GoodsSales
    - Spring MyBatis config => ` mybatis.config-location=classpath:db/mybatis/config.xml `
-   - MyBatis SqlSession Dao => com.github.hcsp.Dao.GoodsSalesDao
+   - MyBatis SqlSession Dao => com.github.hcsp.dao.GoodsSalesDao
+4. 业务代码 Service => com.github.hcsp.service.GoodsSalesService
+5. 创建接口 getGoodsSalesList => ApplicationController
+
+
+
+
+
    
 

@@ -1,4 +1,4 @@
-package com.github.hcsp.Dao;
+package com.github.hcsp.dao;
 
 import com.github.hcsp.entity.GoodsSales;
 import org.apache.ibatis.session.SqlSession;
