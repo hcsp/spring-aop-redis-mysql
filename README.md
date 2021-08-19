@@ -21,5 +21,7 @@
 2. 创建 rank.html => ` http://localhost:8080/rank.html `
 3. 使用 MyBatis => https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
    - Spring Boot MyBatis starter => https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter/2.2.0
-   - MyBatis config 
+   - MyBatis config file => https://mybatis.org/mybatis-3/getting-started.html
+   - MyBatis Mapper file
+   - MyBatis Mapper resultType entity
 
