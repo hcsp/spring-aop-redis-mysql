@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.GoodsSalesMapper">
-    <select id="selectGoodsSales">
+    <select id="selectGoodsSales" resultType="com.github.hcsp.entity.GoodsSales">
         select sum(`order`.price * `order`.quantity) as sales, goods_id as goodsId, goods.name as goodsName
         from `order`
                  join goods on goods.id = `order`.goods_id

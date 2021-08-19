@@ -23,5 +23,5 @@
    - Spring Boot MyBatis starter => https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter/2.2.0
    - MyBatis config file => https://mybatis.org/mybatis-3/getting-started.html
    - MyBatis Mapper file
-   - MyBatis Mapper resultType entity
+   - MyBatis Mapper resultType entity => GoodsSales
 
