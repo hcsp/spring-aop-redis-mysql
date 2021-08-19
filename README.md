@@ -29,3 +29,6 @@
 4. 业务代码 Service => com.github.hcsp.service.GoodsSalesService
 5. 创建接口 getGoodsSalesList => ApplicationController => ` http://localhost:8080/getGoodsSalesList `
 6. rank.html 使用 ` /getGoodsSalesList ` 接口 => ` http://localhost:8080/rank.html ` => 获取数据库数据
+
+### Cache
+1. 创建 @Cache Annotation => com.github.hcsp.anno.Cache
