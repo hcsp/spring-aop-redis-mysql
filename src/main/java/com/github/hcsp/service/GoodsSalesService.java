@@ -15,7 +15,7 @@ public class GoodsSalesService {
         this.goodsSalesDao = goodsSalesDao;
     }
 
-    @Cache
+    @Cache()
     public List<GoodsSales> getGoodsSalesList() {
         return goodsSalesDao.getGoodsSalesList();
     }
