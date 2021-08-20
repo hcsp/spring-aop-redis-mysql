@@ -36,3 +36,13 @@
    - Spring Boot AOP starter
    - com.github.hcsp.CacheAspect
    - 时间限制
+   - Redis
+      - Docker 启动 Redis 服务
+      - Spring Boot Redis starter => https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
+      - Spring Redis config => 
+        ```
+        // application.properties
+        spring.redis.host=localhost
+        spring.redis.port=6379
+        ```
+        
