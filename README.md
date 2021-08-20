@@ -40,9 +40,11 @@
       - Docker 启动 Redis 服务
       - Spring Boot Redis starter => https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
       - Spring Redis config => 
-        ```
-        // application.properties
-        spring.redis.host=localhost
-        spring.redis.port=6379
-        ```
+         ```
+         // application.properties
+         spring.redis.host=localhost
+         spring.redis.port=6379
+         ```
+      - Redis Template => com.github.hcsp.config.ApplicationConfig
+    
         
