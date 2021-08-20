@@ -46,5 +46,6 @@
          spring.redis.port=6379
          ```
       - Redis Template => com.github.hcsp.config.ApplicationConfig
+      - 使用 Redis Template
     
         
