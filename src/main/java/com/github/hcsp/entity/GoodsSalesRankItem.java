@@ -1,9 +1,10 @@
 package com.github.hcsp.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class GoodsSalesRankItem {
+public class GoodsSalesRankItem implements Serializable {
     private int goodsId;
     private String goodsName;
     private BigDecimal sales;

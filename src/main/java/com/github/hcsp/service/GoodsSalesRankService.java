@@ -5,10 +5,11 @@ import com.github.hcsp.dao.GoodsSalesRankDao;
 import com.github.hcsp.entity.GoodsSalesRankItem;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class GoodsSalesRankService {
+public class GoodsSalesRankService implements Serializable {
     private final GoodsSalesRankDao goodsSalesRankDao;
 
     public GoodsSalesRankService(GoodsSalesRankDao goodsSalesRankDao) {

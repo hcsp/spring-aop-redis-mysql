@@ -8,15 +8,19 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
 
 @Aspect
 @Configuration
-public class CacheAspect {
-    private final Map<CacheKey, CacheValue> cache = new HashMap<>();
+public class CacheAspect implements Serializable {
+    private final RedisTemplate<CacheKey, CacheValue> redisCache;
+
+    public CacheAspect(RedisTemplate<CacheKey, CacheValue> redisCache) {
+        this.redisCache = redisCache;
+    }
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
     public Object cache(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
@@ -26,7 +30,7 @@ public class CacheAspect {
         Object caller = proceedingJoinPoint.getThis();
 
         CacheKey cacheKey = new CacheKey(methodName, args, caller);
-        CacheValue cacheValue = cache.get(cacheKey);
+        CacheValue cacheValue = redisCache.opsForValue().get(cacheKey);
 
         int cacheDuration = signature.getMethod().getAnnotation(Cache.class).value();
 
@@ -34,7 +38,7 @@ public class CacheAspect {
             return cacheValue.getValue();
         } else {
             Object realValue = proceedingJoinPoint.proceed();
-            cache.put(cacheKey, new CacheValue(Instant.now(), realValue));
+            redisCache.opsForValue().set(cacheKey, new CacheValue(Instant.now(), realValue));
             return realValue;
         }
     }

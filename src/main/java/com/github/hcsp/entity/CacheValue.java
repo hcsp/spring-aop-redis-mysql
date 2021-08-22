@@ -1,8 +1,9 @@
 package com.github.hcsp.entity;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class CacheValue {
+public class CacheValue implements Serializable {
     private Instant cacheTime;
     private Object value;
 
