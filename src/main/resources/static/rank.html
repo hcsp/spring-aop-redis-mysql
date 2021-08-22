@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <title>商品排行榜</title>
@@ -30,22 +30,27 @@
         <th>商品名</th>
         <th>成交金额</th>
     </tr>
-    <tr>
-        <td>1</td>
-        <td>西瓜</td>
-        <td>400</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>香蕉</td>
-        <td>200</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
 </table>
 
+<script>
+  fetch('http://localhost:8080/getGoodsSalesRank').then(async res => {
+    const result = await res.json();
+    console.log(result);
+    const tableElement = document.querySelector('table');
+    result.map((item, index) => {
+      const firstTdElement = document.createElement('td');
+      firstTdElement.innerText = index + 1;
+      const secondTdElement = document.createElement('td');
+      secondTdElement.innerText = item.goodsName;
+      const thirdTdElement = document.createElement('td');
+      thirdTdElement.innerText = item.sales;
+      const trElement = document.createElement('tr');
+      trElement.appendChild(firstTdElement);
+      trElement.appendChild(secondTdElement);
+      trElement.appendChild(thirdTdElement);
+      tableElement.appendChild(trElement);
+    });
+  });
+</script>
 </body>
 </html>
