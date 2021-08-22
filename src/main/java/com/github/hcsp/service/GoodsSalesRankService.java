@@ -1,5 +1,6 @@
 package com.github.hcsp.service;
 
+import com.github.hcsp.anno.Cache;
 import com.github.hcsp.dao.GoodsSalesRankDao;
 import com.github.hcsp.entity.GoodsSalesRankItem;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class GoodsSalesRankService {
         this.goodsSalesRankDao = goodsSalesRankDao;
     }
 
+    @Cache()
     public List<GoodsSalesRankItem> getGoodsSalesRank() {
         return this.goodsSalesRankDao.getGoodsSalesRank();
     }
