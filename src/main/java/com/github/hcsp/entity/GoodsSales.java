@@ -1,8 +1,9 @@
 package com.github.hcsp.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class GoodsSales {
+public class GoodsSales implements Serializable {
     private int goodsId;
     private String goodsName;
     private BigDecimal sales;

@@ -1,9 +1,10 @@
 package com.github.hcsp.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class CacheKey {
+public class CacheKey implements Serializable {
     private final String name;
     private final Object[] args;
     private final Object caller;

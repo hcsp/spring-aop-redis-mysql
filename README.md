@@ -47,5 +47,6 @@
          ```
       - Redis Template => com.github.hcsp.config.ApplicationConfig
       - 使用 Redis Template
+      - fix Cannot serialize Error => implement Serializable interface: Error => java.io.NotSerializableException: org.springframework.data.redis.core.RedisTemplate
     
         
