@@ -1,7 +1,6 @@
 package com.github.hcsp;
 
 import com.github.hcsp.anno.Cache;
-import com.github.hcsp.entity.CacheKey;
 import com.github.hcsp.entity.CacheValue;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -10,31 +9,27 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.io.Serializable;
+import java.time.Duration;
 import java.time.Instant;
 
 @Aspect
 @Configuration
-public class CacheAspect implements Serializable {
-    private final RedisTemplate<CacheKey, CacheValue> redisCache;
+public class CacheAspect {
+    private final RedisTemplate<String, CacheValue> redisCache;
 
-    public CacheAspect(RedisTemplate<CacheKey, CacheValue> redisCache) {
+    public CacheAspect(RedisTemplate<String, CacheValue> redisCache) {
         this.redisCache = redisCache;
     }
 
     @Around("@annotation(com.github.hcsp.anno.Cache)")
     public Object cache(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
-        String methodName = signature.getName();
-        Object[] args = proceedingJoinPoint.getArgs();
-        Object caller = proceedingJoinPoint.getThis();
-
-        CacheKey cacheKey = new CacheKey(methodName, args, caller);
+        String cacheKey = signature.getName();
         CacheValue cacheValue = redisCache.opsForValue().get(cacheKey);
 
         int cacheDuration = signature.getMethod().getAnnotation(Cache.class).value();
 
-        if (cacheValue != null && Instant.now().getNano() - cacheValue.getCacheTime().getNano() < cacheDuration * 1000) {
+        if (cacheValue != null && Duration.between(cacheValue.getCacheTime(), Instant.now()).getSeconds() < cacheDuration) {
             return cacheValue.getValue();
         } else {
             Object realValue = proceedingJoinPoint.proceed();

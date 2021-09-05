@@ -5,14 +5,19 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class CacheKey implements Serializable {
+    static final long serialVersionUID = 42L;
     private String methodName;
     private Object[] args;
     private Object caller;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CacheKey cacheKey = (CacheKey) o;
         return Objects.equals(methodName, cacheKey.methodName) && Arrays.equals(args, cacheKey.args) && Objects.equals(caller, cacheKey.caller);
     }
