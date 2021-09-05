@@ -58,13 +58,4 @@ public class CacheKey implements Serializable {
     public void setCaller(Object caller) {
         this.caller = caller;
     }
-
-    @Override
-    public String toString() {
-        return "CacheKey{" +
-                "methodName='" + methodName + '\'' +
-                ", args=" + Arrays.toString(args) +
-                ", caller=" + caller +
-                '}';
-    }
 }
