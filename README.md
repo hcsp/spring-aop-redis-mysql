@@ -1,4 +1,4 @@
-# Spring+AOP+Redis+MySQL练习
+# Spring+AOP+Redis+MySQL 练习
 
 请开发一个简单的应用，练习Spring+AOP/MySQL/Redis完成如下功能：
 
