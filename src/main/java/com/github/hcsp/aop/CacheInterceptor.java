@@ -20,6 +20,7 @@ public class CacheInterceptor {
 
     @Around("@annotation(com.github.hcsp.annotation.Cache)")
     public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
+
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         // 这里不严谨, 仅用方法名当做缓存key
