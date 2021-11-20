@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RankMapper">
+    <select id="getRank" resultMap="RankItem">
+        SELECT g.NAME                             AS goods_name,
+               sum(COALESCE(price * quantity, 0)) AS total_price
+        FROM `order` o
+                 RIGHT JOIN goods g ON o.goods_id = g.id
+        GROUP BY goods_name
+        ORDER BY total_price DESC
+    </select>
+    <resultMap id="RankItem" type="com.github.hcsp.entity.RankItem">
+        <result property="goodsName" column="goods_name"/>
+        <result property="totalPrice" column="total_price"/>
+    </resultMap>
+</mapper>
