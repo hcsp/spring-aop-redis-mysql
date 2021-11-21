@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 因为mybatis的环境配置已经在Spring中配置了,因此这里只需要Mapper配置即可 -->
+    <typeAliases>
+        <typeAlias type="com.github.hcsp.entity.Rank" alias="Rank"/>
+        <typeAlias type="com.github.hcsp.entity.Goods" alias="Goods"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="db/mybatis/mybatis-mapper.xml"/>
+    </mappers>
+</configuration>
