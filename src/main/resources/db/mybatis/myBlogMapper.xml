@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myBlogMapper">
+    <select id="selectAndGetRank" resultType="com.github.hcsp.entity.RankItem">
+        select name,total from
+        (select goods_id,sum(o.price * o.quantity) as total from `order` o group by o.goods_id) t
+        right join goods
+        on t.goods_id = goods.id
+        order by total desc
+    </select>
+</mapper>
