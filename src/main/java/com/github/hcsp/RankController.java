@@ -16,7 +16,7 @@ public class RankController {
     private RankService rankService;
 
     @RequestMapping("/rank.htm")
-    public ModelAndView Rank() {
+    public ModelAndView rank() {
         Map<String, Object> model = new HashMap<>();
         model.put("rankItems", rankService.selectAndGetRank());
         return new ModelAndView("index", model);

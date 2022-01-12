@@ -28,9 +28,9 @@ public class CacheAspect {
         if (result == null) {
             System.out.println("第一次查询");
             result = proceedingJoinPoint.proceed();
-            redisTemplate.opsForValue().set(methodName, result, 1L, TimeUnit.SECONDS);
+            //设置key过期时间
+            redisTemplate.opsForValue().set(methodName, result, 2L, TimeUnit.SECONDS);
 
-            System.out.println();
             return result;
         }
         System.out.println("没有再查");
