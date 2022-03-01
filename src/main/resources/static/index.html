@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<head>
+    <title>商品排行榜</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2>商品排行榜</h2>
+
+<table id="rank-table">
+    <tr>
+        <th>排名</th>
+        <th>商品名</th>
+        <th>成交金额</th>
+    </tr>
+</table>
+<script>
+    var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
+    httpRequest.open('GET', '/rank.htm', true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+    httpRequest.send();//第三步：发送请求  将请求参数写在URL中
+    /**
+     * 获取数据后的处理程序
+     */
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+            var json = httpRequest.responseText;//获取到json字符串，还需解析
+            var list = JSON.parse(json);
+            console.log(list);
+            insertData(list);
+        }
+    };
+
+    function insertData(list) {
+        var table = document.getElementById("rank-table");
+        for (var i = 0; i < list.length; i++) {
+            var row = table.insertRow(table.rows.length);
+            var c1 = row.insertCell(0);
+            c1.innerHTML = i + 1;
+            var c2 = row.insertCell(1);
+            c2.innerHTML = list[i].name;
+            var c3 = row.insertCell(2);
+            c3.innerHTML = list[i].totalPrice;
+        }
+    }
+</script>
+</body>
+</html>
