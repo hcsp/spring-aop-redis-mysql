@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyMapper">
+    <select id="getGoodsRankByDesc" resultType="com.github.hcsp.entity.Rank">
+        SELECT goods.id AS goods_id, name as goodName, IFNULL(SUM((price * quantity)), 0) AS totalPrice
+        FROM goods
+                 LEFT JOIN `order` o ON goods.id = o.goods_id
+        GROUP BY goods.id order by totalPrice desc
+    </select>
+
+</mapper>
