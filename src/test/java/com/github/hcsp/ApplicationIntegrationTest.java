@@ -49,7 +49,7 @@ public class ApplicationIntegrationTest {
         );
 
         Thread.sleep(2000);
-
+//
         // 第三次访问，应该得到更新后的数据
         html = Jsoup.parse(new URL(url), 60 * 1000);
         Assertions.assertEquals(
@@ -64,7 +64,7 @@ public class ApplicationIntegrationTest {
     }
 
     private void runSql(String sql) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8", "root", "123456");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8", "root", "root");
         try (Statement statement = conn.createStatement()) {
             statement.execute(sql);
         }
