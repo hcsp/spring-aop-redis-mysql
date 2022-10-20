@@ -3,13 +3,6 @@ package com.github.hcsp.entity;
 import java.io.Serializable;
 
 public class Order implements Serializable {
-    private int id;
-    private int goods_id;
-
-    private int user_id;
-    private int price;
-    private int quantity;
-
     public int getId() {
         return id;
     }
@@ -18,20 +11,20 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public int getGoods_id() {
-        return goods_id;
+    public int getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoods_id(int goods_id) {
-        this.goods_id = goods_id;
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getPrice() {
@@ -49,6 +42,16 @@ public class Order implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    private int id;
+    private int goodsId;
+    private int userId;
+    private int price;
+    private int quantity;
+
+
+
+
 
 
 }
