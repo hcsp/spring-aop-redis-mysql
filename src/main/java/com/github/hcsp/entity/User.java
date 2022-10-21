@@ -1,6 +1,8 @@
 package com.github.hcsp.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     public int getId() {
         return id;
     }

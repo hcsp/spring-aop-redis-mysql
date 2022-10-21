@@ -22,6 +22,4 @@ public class Money implements Serializable {
         this.totalMoney = totalMoney;
     }
 
-    public Money() {
-    }
 }

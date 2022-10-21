@@ -19,7 +19,7 @@ public class CacheAspect {
          RedisTemplate<String, Object> cache;
 
         //标注将要拦截的方法
-        @Around("@annotation(com.github.hcsp.annotation.MyCache)")
+        @Around("@annotation(com.github.hcsp.annotation.Cache)")
         public Object cache(ProceedingJoinPoint joinPoint) {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             String methodName = signature.getName();
