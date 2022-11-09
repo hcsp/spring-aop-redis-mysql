@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RankMapper">
+    <select id="selectProductRank" resultType="com.github.hcsp.entity.GoodsSaleRankItem">
+        select g.name as goodsName, g.id as goodsId, sum(COALESCE(o.price * o.quantity, 0)) as sales
+        from goods g
+                 left join `order` o on g.id = o.goods_id
+        group by goodsId
+        order by sales desc;
+    </select>
+</mapper>
