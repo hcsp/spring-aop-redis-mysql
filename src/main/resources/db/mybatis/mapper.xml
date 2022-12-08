@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper">
+    <select id="selectSale" resultMap="moneyMap">
+        select sum(`order`.price * `order`.quantity) as `成交金额`, goods.name as `商品名`
+        from `order`
+        right join goods on goods.id = `order`.goods_id
+        group by `商品名`
+        order by `成交金额` desc
+    </select>
+
+    <resultMap id="moneyMap" type="com.github.hcsp.entity.Money">
+        <result property="totalMoney" column="成交金额"/>
+        <association property="goods" javaType="com.github.hcsp.entity.Goods">
+            <result property="name" column="商品名"/>
+        </association>
+    </resultMap>
+</mapper>
