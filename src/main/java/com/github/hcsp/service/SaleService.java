@@ -15,4 +15,20 @@ public class SaleService {
     public List<Money> getSale() {
         return saleDao.getSale();
     }
+
+    public static void main(String[] args) {
+        new Counter().f(5);
+    }
+    static class Counter {
+            int value;
+
+            public int f(int n) {
+                if (n == 0 || n == 1) {
+                    return 1;
+                } else {
+                    return f(n - 1) + f(n - 2);
+                }
+            }
+        }
+
 }
