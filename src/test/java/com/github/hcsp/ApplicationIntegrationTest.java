@@ -64,9 +64,10 @@ public class ApplicationIntegrationTest {
     }
 
     private void runSql(String sql) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mall?characterEncoding=utf-8", "root", "123456");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/mall?characterEncoding=utf-8", "root", "123456");
         try (Statement statement = conn.createStatement()) {
             statement.execute(sql);
+            System.out.println("success----------------------------------------");
         }
     }
 }
